@@ -115,21 +115,6 @@ const toolsPackages: BootstrapConfig[] = [
     },
   },
 ]
-const releasePackages: BootstrapConfig[] = [
-  {
-    packageName: `release-it`,
-    afterInstall: async (cwd) => {
-      await setNpmScripts(cwd, { release: 'release-it' })
-    },
-    configFile: {
-      configFileName: `.release-it.json`,
-      configFileRaw: RELEASE_IT,
-    },
-  },
-  {
-    packageName: `@release-it/conventional-changelog`,
-  },
-]
 interface Chain extends PromptObject {
   name: string
   actions: BootstrapConfig[]
@@ -220,11 +205,53 @@ const chain: Chain[] = [
   {
     name: 'release',
     type: 'toggle',
-    message: 'release-it',
+    message: 'release-it or changesets',
     initial: true,
     active: 'yes',
     inactive: 'no',
-    actions: releasePackages,
+    actions: [],
+  },
+  {
+    name: 'releaseType',
+    type: (prev) => (prev ? 'select' : null),
+    message: 'choose the version tool',
+    initial: 0,
+    choices: [
+      {
+        title: 'release-it',
+        description: 'release-it',
+        value: 'release-it',
+      },
+      {
+        title: 'changesets',
+        description: 'changesets',
+        value: 'changesets',
+      },
+    ],
+    actions: [
+      {
+        name: 'release-it',
+        packageName: `release-it`,
+        afterInstall: async (cwd) => {
+          await setNpmScripts(cwd, { release: 'release-it' })
+        },
+        configFile: {
+          configFileName: `.release-it.json`,
+          configFileRaw: RELEASE_IT,
+        },
+      },
+      {
+        name: 'release-it',
+        packageName: `@release-it/conventional-changelog`,
+      },
+      {
+        name: 'changesets',
+        packageName: `@changesets/cli`,
+        afterInstall: async (cwd) => {
+          await execa('npx', ['changeset', 'init'], { cwd })
+        },
+      },
+    ],
   },
 ]
 
