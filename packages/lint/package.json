@@ -1,0 +1,73 @@
+{
+  "name": "@chenyueban/lint",
+  "version": "1.8.1",
+  "description": "Lint Sharable Configurations and Rules",
+  "type": "module",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "main": "./src/index.cjs",
+  "bin": {
+    "cl": "./dist/install.js"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "tsc -w",
+    "build": "tsc",
+    "prerelease": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
+  },
+  "keywords": [
+    "eslint",
+    "prettier",
+    "eslintConfig",
+    "husky",
+    "lint-staged",
+    "git hooks"
+  ],
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "peerDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0",
+    "typescript": ">=4.0.0"
+  },
+  "dependencies": {
+    "@antfu/install-pkg": "^0.1.0",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.3",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-vue": "^8.5.0",
+    "execa": "^6.1.0",
+    "kolorist": "^1.5.1",
+    "pkg-up": "^4.0.0",
+    "prompts": "^2.4.2",
+    "vue-eslint-parser": "^8.3.0"
+  },
+  "devDependencies": {
+    "@chenyueban/tsconfig": "workspace:*",
+    "@types/prompts": "^2.0.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

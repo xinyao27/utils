@@ -1,0 +1,52 @@
+{
+  "name": "@chenyueban/tsconfig",
+  "version": "0.3.1",
+  "description": "tsconfig.json inheritance via Node.js packages",
+  "tsconfig": "tsconfig.json",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./tsconfig.json",
+      "require": "./tsconfig.json"
+    }
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "scripts": {
+    "postinstall": "node bin/install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
+  },
+  "keywords": [
+    "tsconfig",
+    "base",
+    "inheritance",
+    "share"
+  ],
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "peerDependencies": {
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "pkg-up": "^4.0.0"
+  },
+  "files": [
+    "tsconfig.json",
+    "bin/install.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
