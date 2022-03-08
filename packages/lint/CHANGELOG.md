@@ -1,5 +1,13 @@
 # @chenyueban/lint
 
+## 2.1.1
+
+### Patch Changes
+
+- cli
+- Updated dependencies
+  - @chenyueban/utils@1.0.0
+
 ## 2.1.0
 
 ### Minor Changes

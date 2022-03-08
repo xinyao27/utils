@@ -1,5 +1,11 @@
 # @chenyueban/tsconfig
 
+## 1.0.1
+
+### Patch Changes
+
+- cli
+
 ## 1.0.0
 
 ### Major Changes
