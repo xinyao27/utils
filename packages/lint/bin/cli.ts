@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import path from 'path'
 import fs from 'fs/promises'
 import { existsSync } from 'fs'
@@ -6,7 +7,7 @@ import { pkgUp } from 'pkg-up'
 import { execa } from 'execa'
 import prompts, { type PromptObject } from 'prompts'
 
-import { error, setNpmScripts, bootstrap, BootstrapConfig } from './utils.js'
+import { error, setNpmScripts, bootstrap, BootstrapConfig } from './utils'
 import {
   CZRC,
   COMMITLINTRC,
@@ -19,7 +20,7 @@ import {
   LINTSTAGEDRC,
   RELEASE_IT,
   GITIGNORE,
-} from './raw.js'
+} from './raw'
 
 const basePackages: BootstrapConfig[] = [
   {

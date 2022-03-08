@@ -9,11 +9,12 @@
   },
   "main": "./src/vanilla.cjs",
   "bin": {
-    "cl": "./dist/install.js"
+    "cl": "./dist/cli.js"
   },
   "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc"
+    "prebuild": "rimraf dist",
+    "dev": "tsup bin/cli.ts --format esm --watch",
+    "build": "tsup bin/cli.ts --format esm"
   },
   "repository": {
     "type": "git",

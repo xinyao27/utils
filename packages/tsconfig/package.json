@@ -15,7 +15,7 @@
     "npm": ">=7"
   },
   "scripts": {
-    "postinstall": "node bin/install.js"
+    "postinstall": "node bin/install.mjs"
   },
   "repository": {
     "type": "git",
