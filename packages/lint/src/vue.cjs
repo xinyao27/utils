@@ -9,7 +9,7 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb-typescript',
-    'plugin:prettier/recommended',
+    'prettier',
     'plugin:vue/base',
     'plugin:vue/vue3-essential',
     'plugin:vue/vue3-strongly-recommended',
@@ -27,7 +27,5 @@ module.exports = {
     sourceType: 'module',
     extraFileExtensions: ['.vue'],
   },
-  rules: {
-    ...rules,
-  },
+  rules,
 }
