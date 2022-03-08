@@ -1,6 +1,6 @@
 {
   "name": "@chenyueban/lint",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Lint Sharable Configurations and Rules",
   "type": "module",
   "engines": {
