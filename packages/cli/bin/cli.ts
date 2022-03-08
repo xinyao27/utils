@@ -47,14 +47,14 @@ const chain: Chain[] = [
             .map((commit) => commit.subject)
             .join('\n')
           clipboard.write(str)
-          log('已经帮你复制好啦~ \n', str)
+          consola.log('已经帮你复制好啦~ \n', str)
         },
       },
       {
         name: 'full',
         fn: async () => {
           const commits = await todayGitCommits()
-          log(commits)
+          consola.log(commits)
         },
       },
     ],
