@@ -1,0 +1,51 @@
+{
+  "name": "@chenyueban/cli",
+  "version": "0.0.0",
+  "description": "Chenyueban CLI",
+  "type": "module",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "bin": {
+    "c": "./dist/cli.js"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "dev": "tsup bin/cli.ts --format esm --watch",
+    "build": "tsup bin/cli.ts --format esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
+  },
+  "keywords": [
+    "cli",
+    "git"
+  ],
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "dependencies": {
+    "@chenyueban/utils": "workspace:*",
+    "clipboardy": "^3.0.0",
+    "dayjs": "^1.10.8",
+    "execa": "^6.1.0",
+    "gitlog": "^4.0.4",
+    "kolorist": "^1.5.1",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@chenyueban/tsconfig": "workspace:*",
+    "@types/prompts": "^2.0.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

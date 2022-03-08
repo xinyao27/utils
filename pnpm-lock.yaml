@@ -26,10 +26,34 @@ importers:
       rimraf: 3.0.2
       tsup: 5.12.0
 
+  packages/cli:
+    specifiers:
+      '@chenyueban/tsconfig': workspace:*
+      '@chenyueban/utils': workspace:^0.0.0
+      '@types/prompts': ^2.0.14
+      clipboardy: ^3.0.0
+      dayjs: ^1.10.8
+      execa: ^6.1.0
+      gitlog: ^4.0.4
+      kolorist: ^1.5.1
+      prompts: ^2.4.2
+    dependencies:
+      '@chenyueban/utils': link:../utils
+      clipboardy: 3.0.0
+      dayjs: 1.10.8
+      execa: 6.1.0
+      gitlog: 4.0.4
+      kolorist: 1.5.1
+      prompts: 2.4.2
+    devDependencies:
+      '@chenyueban/tsconfig': link:../tsconfig
+      '@types/prompts': 2.0.14
+
   packages/lint:
     specifiers:
       '@antfu/install-pkg': ^0.1.0
       '@chenyueban/tsconfig': workspace:*
+      '@chenyueban/utils': workspace:^0.0.0
       '@commitlint/config-conventional': ^16.2.1
       '@types/prompts': ^2.0.14
       '@typescript-eslint/eslint-plugin': ^5.13.0
@@ -50,6 +74,7 @@ importers:
       vue-eslint-parser: ^8.3.0
     dependencies:
       '@antfu/install-pkg': 0.1.0
+      '@chenyueban/utils': link:../utils
       '@commitlint/config-conventional': 16.2.1
       '@typescript-eslint/eslint-plugin': 5.13.0_6dd526c314f6019c73c06093040a69c4
       '@typescript-eslint/parser': 5.13.0_eslint@8.10.0
@@ -76,6 +101,15 @@ importers:
       pkg-up: ^4.0.0
     dependencies:
       pkg-up: 4.0.0
+
+  packages/utils:
+    specifiers:
+      '@chenyueban/tsconfig': workspace:*
+      consola: ^2.15.3
+    dependencies:
+      consola: 2.15.3
+    devDependencies:
+      '@chenyueban/tsconfig': link:../tsconfig
 
 packages:
 
@@ -832,6 +866,10 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /arch/2.2.0:
+    resolution: {integrity: sha512-Of/R0wqp83cgHozfIYLbBMnej79U/SVGOOyuB3VVFv1NRM/PSFMK12x9KVtiYzJqmnU5WR2qp0Z5rHb7sWGnFQ==}
+    dev: false
+
   /arg/4.1.3:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
     dev: true
@@ -1079,6 +1117,15 @@ packages:
     resolution: {integrity: sha512-GRMWDxpOB6Dgk2E5Uo+3eEBvtOOlimMmpbFiKuLFnQzYDavtLFY3K5ona41jgN/WdRZtG7utuVSVTL4HbZHGkw==}
     dev: true
 
+  /clipboardy/3.0.0:
+    resolution: {integrity: sha512-Su+uU5sr1jkUy1sGRpLKjKrvEOVXgSgiSInwa/qeID6aJ07yh+5NWc3h2QfjHjBnfX4LhtFcuAWKUsJ3r+fjbg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      arch: 2.2.0
+      execa: 5.1.1
+      is-wsl: 2.2.0
+    dev: false
+
   /cliui/6.0.0:
     resolution: {integrity: sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ==}
     dependencies:
@@ -1170,6 +1217,10 @@ packages:
 
   /confusing-browser-globals/1.0.11:
     resolution: {integrity: sha512-JsPKdmh8ZkmnHxDk55FZ1TqVLvEQTvoByJZRN9jzI0UjxK/QgAmsphz7PGtqgPieQZ/CQcHWXCR7ATDNhGe+YA==}
+    dev: false
+
+  /consola/2.15.3:
+    resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
     dev: false
 
   /conventional-changelog-angular/5.0.13:
@@ -1322,6 +1373,10 @@ packages:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
     engines: {node: '>=8'}
     dev: true
+
+  /dayjs/1.10.8:
+    resolution: {integrity: sha512-wbNwDfBHHur9UOzNUjeKUOJ0fCb0a52Wx0xInmQ7Y8FstyajiV1NmK1e00cxsr9YrE9r7yAChE0VvpuY5Rnlow==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -2263,6 +2318,16 @@ packages:
       through2: 4.0.2
     dev: true
 
+  /gitlog/4.0.4:
+    resolution: {integrity: sha512-jeY2kO7CVyTa6cUM7ZD2ZxIyBkna1xvW2esV/3o8tbhiUneX1UBQCH4D9aMrHgGiohBjyXbuZogyjKXslnY5Yg==}
+    engines: {node: '>= 10.x'}
+    dependencies:
+      debug: 4.3.3
+      tslib: 1.14.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /glob-parent/5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -2551,6 +2616,12 @@ packages:
       has-tostringtag: 1.0.0
     dev: false
 
+  /is-docker/2.2.1:
+    resolution: {integrity: sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==}
+    engines: {node: '>=8'}
+    hasBin: true
+    dev: false
+
   /is-extglob/2.1.1:
     resolution: {integrity: sha1-qIwCU1eR8C7TfHahueqXc8gz+MI=}
     engines: {node: '>=0.10.0'}
@@ -2664,6 +2735,13 @@ packages:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /is-wsl/2.2.0:
+    resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==}
+    engines: {node: '>=8'}
+    dependencies:
+      is-docker: 2.2.1
+    dev: false
 
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}

@@ -6,8 +6,9 @@ import { existsSync } from 'fs'
 import { pkgUp } from 'pkg-up'
 import { execa } from 'execa'
 import prompts, { type PromptObject } from 'prompts'
+import { consola } from '@chenyueban/utils'
 
-import { error, setNpmScripts, bootstrap, BootstrapConfig } from './utils'
+import { setNpmScripts, bootstrap, BootstrapConfig } from './utils'
 import {
   CZRC,
   COMMITLINTRC,
@@ -288,6 +289,6 @@ async function main() {
 main()
   .then(process.exit)
   .catch((e) => {
-    error(e)
+    consola.error(e)
     process.exit(1)
   })

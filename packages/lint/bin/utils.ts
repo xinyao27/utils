@@ -1,22 +1,9 @@
 import fs from 'fs/promises'
 import { existsSync } from 'fs'
 import path from 'path'
-import { yellow, cyan, red } from 'kolorist'
 import { pkgUp } from 'pkg-up'
 import { installPackage } from '@antfu/install-pkg'
-
-export function log(data: string) {
-  // eslint-disable-next-line no-console
-  console.log(yellow('[@chenyueban/lint]: '), cyan(data))
-}
-
-export function warn(data: string) {
-  console.warn(yellow('[@chenyueban/lint]: '), red(data))
-}
-
-export function error(data: string) {
-  console.error(yellow('[@chenyueban/lint]: '), red(data))
-}
+import { consola } from '@chenyueban/utils'
 
 export async function setNpmScripts(
   cwd: string,
@@ -68,7 +55,7 @@ export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
       const configFilePath = path.join(cwd, configFileName)
       if (!existsSync(configFilePath)) {
         await fs.writeFile(configFilePath, configFileRaw)
-        log(`auto generated ${configFileName}`)
+        consola.log(`auto generated ${configFileName}`)
       }
     }
   }
