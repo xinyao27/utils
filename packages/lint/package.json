@@ -7,15 +7,13 @@
     "node": ">=16",
     "npm": ">=7"
   },
-  "main": "./src/index.cjs",
+  "main": "./src/vanilla.cjs",
   "bin": {
     "cl": "./dist/install.js"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "dev": "tsc -w",
-    "build": "tsc",
-    "prerelease": "npm run build"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
