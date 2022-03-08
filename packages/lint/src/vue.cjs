@@ -25,6 +25,7 @@ module.exports = {
     project: 'tsconfig.json',
     ecmaVersion: 'latest',
     sourceType: 'module',
+    extraFileExtensions: ['.vue'],
   },
   rules: {
     ...rules,
