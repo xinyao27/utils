@@ -1,5 +1,4 @@
 import fs from 'fs/promises'
-import { existsSync } from 'fs'
 import path from 'path'
 import { pkgUp } from 'pkg-up'
 import { installPackage } from '@antfu/install-pkg'
@@ -52,10 +51,8 @@ export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
     if (configFile) {
       const { configFileName, configFileRaw } = configFile
       const configFilePath = path.join(cwd, configFileName)
-      if (!existsSync(configFilePath)) {
-        await fs.writeFile(configFilePath, configFileRaw)
-        consola.log(`auto generated ${configFileName}`)
-      }
+      await fs.writeFile(configFilePath, configFileRaw)
+      consola.info(`auto generated ${configFileName}`)
     }
   }
 }

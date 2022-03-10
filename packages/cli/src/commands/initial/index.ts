@@ -26,6 +26,9 @@ import type { Choice, Chain, Question } from '../../utils'
 const basePackages: BootstrapConfig[] = [
   {
     afterInstall: async (cwd) => {
+      if (!existsSync(path.join(cwd, '.git'))) {
+        await execa('git', ['init'], { cwd })
+      }
       await setNpmScripts(cwd, { 'update:deps': 'pnpm update -i --latest' })
     },
   },
@@ -154,7 +157,7 @@ export const chain: Chain = [
     actions: [
       {
         fn: async (cwd) => {
-          bootstrap(cwd, basePackages)
+          await bootstrap(cwd, basePackages)
         },
       },
     ],
@@ -169,7 +172,7 @@ export const chain: Chain = [
     actions: [
       {
         fn: async (cwd) => {
-          bootstrap(cwd, typescriptPackages)
+          await bootstrap(cwd, typescriptPackages)
         },
       },
     ],
@@ -184,7 +187,7 @@ export const chain: Chain = [
     actions: [
       {
         fn: async (cwd) => {
-          bootstrap(cwd, commitPackages)
+          await bootstrap(cwd, commitPackages)
         },
       },
     ],
@@ -199,7 +202,7 @@ export const chain: Chain = [
     actions: [
       {
         fn: async (cwd) => {
-          bootstrap(cwd, lintPackages)
+          await bootstrap(cwd, lintPackages)
         },
       },
     ],
@@ -230,7 +233,7 @@ export const chain: Chain = [
       {
         name: `vanilla`,
         fn: async (cwd) => {
-          bootstrap(cwd, [
+          await bootstrap(cwd, [
             {
               configFile: {
                 configFileName: `.eslintrc`,
@@ -243,7 +246,7 @@ export const chain: Chain = [
       {
         name: `react`,
         fn: async (cwd) => {
-          bootstrap(cwd, [
+          await bootstrap(cwd, [
             {
               configFile: {
                 configFileName: `.eslintrc`,
@@ -256,7 +259,7 @@ export const chain: Chain = [
       {
         name: `vue`,
         fn: async (cwd) => {
-          bootstrap(cwd, [
+          await bootstrap(cwd, [
             {
               configFile: {
                 configFileName: `.eslintrc`,
@@ -278,7 +281,7 @@ export const chain: Chain = [
     actions: [
       {
         fn: async (cwd) => {
-          bootstrap(cwd, toolsPackages)
+          await bootstrap(cwd, toolsPackages)
         },
       },
     ],
@@ -313,7 +316,7 @@ export const chain: Chain = [
       {
         name: 'release-it',
         fn: async (cwd) => {
-          bootstrap(cwd, [
+          await bootstrap(cwd, [
             {
               packageName: `release-it`,
               afterInstall: async (c) => {
@@ -330,7 +333,7 @@ export const chain: Chain = [
       {
         name: 'release-it',
         fn: async (cwd) => {
-          bootstrap(cwd, [
+          await bootstrap(cwd, [
             {
               packageName: `@release-it/conventional-changelog`,
             },
@@ -340,7 +343,7 @@ export const chain: Chain = [
       {
         name: 'changesets',
         fn: async (cwd) => {
-          bootstrap(cwd, [
+          await bootstrap(cwd, [
             {
               packageName: `@changesets/cli`,
               afterInstall: async (c) => {

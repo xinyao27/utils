@@ -48,14 +48,14 @@ export const chain: Chain = {
       fn: async () => {
         const str = (await git()).map((commit) => commit.subject).join('\n')
         clipboard.write(str)
-        consola.log('已经帮你复制好啦~ \n', str)
+        consola.info('已经帮你复制好啦~ \n', str)
       },
     },
     {
       name: 'full',
       fn: async () => {
         const commits = await git()
-        consola.log(commits)
+        consola.info(commits)
       },
     },
   ],

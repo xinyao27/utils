@@ -4,6 +4,7 @@ import { cwd, exit } from 'process'
 import prompts from 'prompts'
 import { consola } from '@chenyueban/utils'
 
+import pkg from '../package.json'
 import { choice as gitChoice, question as gitQuestion } from './commands/git'
 import {
   choice as initialChoice,
@@ -11,18 +12,18 @@ import {
 } from './commands/initial'
 import { type Chain, getActionsFromResponse } from './utils'
 
-const chain: Chain = [
-  {
-    name: 'select',
-    type: 'select',
-    message: 'What do you want to do?',
-    choices: [gitChoice, initialChoice],
-    initial: 0,
-  },
-]
-const question = [gitQuestion, initialQuestion]
-
 async function main() {
+  const CWD = cwd()
+  const chain: Chain = [
+    {
+      name: 'select',
+      type: 'select',
+      message: `@chenyueban/cli v${pkg.version}`,
+      choices: [gitChoice, initialChoice],
+      initial: 0,
+    },
+  ]
+  const question = [gitQuestion, initialQuestion]
   const response = await prompts(chain)
   const { select } = response
   const response2 = await prompts(
@@ -34,7 +35,7 @@ async function main() {
   )
 
   for (const action of actions) {
-    await action?.(cwd())
+    await action?.(CWD)
   }
 }
 
