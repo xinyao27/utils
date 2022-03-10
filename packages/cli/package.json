@@ -8,12 +8,12 @@
     "npm": ">=7"
   },
   "bin": {
-    "c": "./dist/cli.js"
+    "c": "./dist/index.js"
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "dev": "tsup bin/cli.ts --format esm --watch",
-    "build": "tsup bin/cli.ts --format esm"
+    "dev": "tsup src/index.ts --format esm --watch",
+    "build": "tsup src/index.ts --format esm"
   },
   "repository": {
     "type": "git",
@@ -33,12 +33,14 @@
   },
   "homepage": "https://github.com/chenyueban/utils#readme",
   "dependencies": {
+    "@antfu/install-pkg": "^0.1.0",
     "@chenyueban/utils": "workspace:*",
     "clipboardy": "^3.0.0",
     "dayjs": "^1.10.8",
     "execa": "^6.1.0",
     "gitlog": "^4.0.4",
     "kolorist": "^1.5.1",
+    "pkg-up": "^4.0.0",
     "prompts": "^2.4.2"
   },
   "devDependencies": {

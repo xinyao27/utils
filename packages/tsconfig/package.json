@@ -14,9 +14,6 @@
     "node": ">=16",
     "npm": ">=7"
   },
-  "scripts": {
-    "postinstall": "node bin/install.mjs"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chenyueban/utils.git"
@@ -39,12 +36,8 @@
   "peerDependencies": {
     "typescript": "^4.4.2"
   },
-  "dependencies": {
-    "pkg-up": "^4.0.0"
-  },
   "files": [
-    "tsconfig.json",
-    "bin/install.js"
+    "tsconfig.json"
   ],
   "publishConfig": {
     "access": "public"

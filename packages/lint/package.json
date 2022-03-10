@@ -8,14 +8,6 @@
     "npm": ">=7"
   },
   "main": "./src/vanilla.cjs",
-  "bin": {
-    "cl": "./dist/cli.js"
-  },
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "dev": "tsup bin/cli.ts --format esm --watch",
-    "build": "tsup bin/cli.ts --format esm"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chenyueban/utils.git"
@@ -23,10 +15,7 @@
   "keywords": [
     "eslint",
     "prettier",
-    "eslintConfig",
-    "husky",
-    "lint-staged",
-    "git hooks"
+    "eslintConfig"
   ],
   "author": {
     "name": "chenyueban",
@@ -43,9 +32,6 @@
     "typescript": ">=4.0.0"
   },
   "dependencies": {
-    "@antfu/install-pkg": "^0.1.0",
-    "@chenyueban/utils": "workspace:*",
-    "@commitlint/config-conventional": "^16.2.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -57,15 +43,7 @@
     "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-vue": "^8.5.0",
-    "execa": "^6.1.0",
-    "kolorist": "^1.5.1",
-    "pkg-up": "^4.0.0",
-    "prompts": "^2.4.2",
     "vue-eslint-parser": "^8.3.0"
-  },
-  "devDependencies": {
-    "@chenyueban/tsconfig": "workspace:*",
-    "@types/prompts": "^2.0.14"
   },
   "publishConfig": {
     "access": "public"

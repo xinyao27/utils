@@ -12,8 +12,6 @@ export const isString = (val: unknown): val is string => typeof val === 'string'
 export const isObject = (val: any): val is object =>
   toString(val) === '[object Object]'
 
-export const isArray = (val: any): val is [] => Array.isArray(val)
-
 export const isWindow = (val: any): boolean =>
   typeof window !== 'undefined' && toString(val) === '[object Window]'
 

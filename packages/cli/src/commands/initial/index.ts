@@ -3,14 +3,13 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { existsSync } from 'fs'
-import { pkgUp } from 'pkg-up'
 import { execa } from 'execa'
-import prompts, { type PromptObject } from 'prompts'
-import { consola } from '@chenyueban/utils'
 
 import { setNpmScripts, bootstrap, BootstrapConfig } from './utils'
 import {
   CZRC,
+  TSCONFIG_JSON_CONTENT,
+  TSCONFIG_NODE_JSON_CONTENT,
   COMMITLINTRC,
   ESLINTRC_VANILLA,
   ESLINTRC_REACT,
@@ -22,6 +21,7 @@ import {
   RELEASE_IT,
   GITIGNORE,
 } from './raw'
+import type { Choice, Chain, Question } from '../../utils'
 
 const basePackages: BootstrapConfig[] = [
   {
@@ -39,6 +39,23 @@ const basePackages: BootstrapConfig[] = [
     configFile: {
       configFileName: `.editorconfig`,
       configFileRaw: EDITOR_CONFIG,
+    },
+  },
+]
+const typescriptPackages: BootstrapConfig[] = [
+  {
+    packageName: `@chenyueban/tsconfig`,
+  },
+  {
+    configFile: {
+      configFileName: `tsconfig.json`,
+      configFileRaw: TSCONFIG_JSON_CONTENT,
+    },
+  },
+  {
+    configFile: {
+      configFileName: `tsconfig.node.json`,
+      configFileRaw: TSCONFIG_NODE_JSON_CONTENT,
     },
   },
 ]
@@ -68,6 +85,9 @@ const commitPackages: BootstrapConfig[] = [
   },
 ]
 const lintPackages: BootstrapConfig[] = [
+  {
+    packageName: `@chenyueban/lint`,
+  },
   {
     packageName: `eslint`,
   },
@@ -117,11 +137,13 @@ const toolsPackages: BootstrapConfig[] = [
     },
   },
 ]
-interface Chain extends PromptObject {
-  name: string
-  actions: BootstrapConfig[]
+
+export const choice: Choice = {
+  title: 'Initial',
+  description: '初始化项目',
+  value: 'initial',
 }
-const chain: Chain[] = [
+export const chain: Chain = [
   {
     name: 'base',
     type: 'toggle',
@@ -129,7 +151,28 @@ const chain: Chain[] = [
     initial: true,
     active: 'yes',
     inactive: 'no',
-    actions: basePackages,
+    actions: [
+      {
+        fn: async (cwd) => {
+          bootstrap(cwd, basePackages)
+        },
+      },
+    ],
+  },
+  {
+    name: 'typescript',
+    type: 'toggle',
+    message: 'typescript config (tsconfig.json)',
+    initial: true,
+    active: 'yes',
+    inactive: 'no',
+    actions: [
+      {
+        fn: async (cwd) => {
+          bootstrap(cwd, typescriptPackages)
+        },
+      },
+    ],
   },
   {
     name: 'commit',
@@ -138,7 +181,13 @@ const chain: Chain[] = [
     initial: true,
     active: 'yes',
     inactive: 'no',
-    actions: commitPackages,
+    actions: [
+      {
+        fn: async (cwd) => {
+          bootstrap(cwd, commitPackages)
+        },
+      },
+    ],
   },
   {
     name: 'lint',
@@ -147,7 +196,13 @@ const chain: Chain[] = [
     initial: true,
     active: 'yes',
     inactive: 'no',
-    actions: lintPackages,
+    actions: [
+      {
+        fn: async (cwd) => {
+          bootstrap(cwd, lintPackages)
+        },
+      },
+    ],
   },
   {
     name: 'lintType',
@@ -174,23 +229,41 @@ const chain: Chain[] = [
     actions: [
       {
         name: `vanilla`,
-        configFile: {
-          configFileName: `.eslintrc`,
-          configFileRaw: ESLINTRC_VANILLA,
+        fn: async (cwd) => {
+          bootstrap(cwd, [
+            {
+              configFile: {
+                configFileName: `.eslintrc`,
+                configFileRaw: ESLINTRC_VANILLA,
+              },
+            },
+          ])
         },
       },
       {
         name: `react`,
-        configFile: {
-          configFileName: `.eslintrc`,
-          configFileRaw: ESLINTRC_REACT,
+        fn: async (cwd) => {
+          bootstrap(cwd, [
+            {
+              configFile: {
+                configFileName: `.eslintrc`,
+                configFileRaw: ESLINTRC_REACT,
+              },
+            },
+          ])
         },
       },
       {
         name: `vue`,
-        configFile: {
-          configFileName: `.eslintrc`,
-          configFileRaw: ESLINTRC_VUE,
+        fn: async (cwd) => {
+          bootstrap(cwd, [
+            {
+              configFile: {
+                configFileName: `.eslintrc`,
+                configFileRaw: ESLINTRC_VUE,
+              },
+            },
+          ])
         },
       },
     ],
@@ -202,7 +275,13 @@ const chain: Chain[] = [
     initial: true,
     active: 'yes',
     inactive: 'no',
-    actions: toolsPackages,
+    actions: [
+      {
+        fn: async (cwd) => {
+          bootstrap(cwd, toolsPackages)
+        },
+      },
+    ],
   },
   {
     name: 'release',
@@ -233,62 +312,48 @@ const chain: Chain[] = [
     actions: [
       {
         name: 'release-it',
-        packageName: `release-it`,
-        afterInstall: async (cwd) => {
-          await setNpmScripts(cwd, { release: 'release-it' })
-        },
-        configFile: {
-          configFileName: `.release-it.json`,
-          configFileRaw: RELEASE_IT,
+        fn: async (cwd) => {
+          bootstrap(cwd, [
+            {
+              packageName: `release-it`,
+              afterInstall: async (c) => {
+                await setNpmScripts(c, { release: 'release-it' })
+              },
+              configFile: {
+                configFileName: `.release-it.json`,
+                configFileRaw: RELEASE_IT,
+              },
+            },
+          ])
         },
       },
       {
         name: 'release-it',
-        packageName: `@release-it/conventional-changelog`,
+        fn: async (cwd) => {
+          bootstrap(cwd, [
+            {
+              packageName: `@release-it/conventional-changelog`,
+            },
+          ])
+        },
       },
       {
         name: 'changesets',
-        packageName: `@changesets/cli`,
-        afterInstall: async (cwd) => {
-          await execa('npx', ['changeset', 'init'], { cwd })
+        fn: async (cwd) => {
+          bootstrap(cwd, [
+            {
+              packageName: `@changesets/cli`,
+              afterInstall: async (c) => {
+                await execa('npx', ['changeset', 'init'], { cwd: c })
+              },
+            },
+          ])
         },
       },
     ],
   },
 ]
-
-async function main() {
-  const cwd = process.cwd()
-  const pkgFile = await pkgUp({ cwd })
-  if (!pkgFile) {
-    return 0
-  }
-  const pkgDir = path.dirname(pkgFile)
-
-  const response = await prompts(chain)
-
-  for (const name in response) {
-    if (Object.prototype.hasOwnProperty.call(response, name)) {
-      const config = chain.find((v) => v.name === name)
-      if (config) {
-        if (config.name === 'lintType') {
-          await bootstrap(
-            pkgDir,
-            config.actions.filter((v) => v.name === response[name])
-          )
-        } else {
-          await bootstrap(pkgDir, config.actions)
-        }
-      }
-    }
-  }
-
-  return 0
+export const question: Question = {
+  name: 'initial',
+  chain,
 }
-
-main()
-  .then(process.exit)
-  .catch((e) => {
-    consola.error(e)
-    process.exit(1)
-  })

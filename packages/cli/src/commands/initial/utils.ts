@@ -26,7 +26,6 @@ export async function setNpmScripts(
 }
 
 export interface BootstrapConfig {
-  name?: string
   afterInstall?: (cwd: string) => Promise<void>
   packageName?: string
   configFile?: {

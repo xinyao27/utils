@@ -6,7 +6,7 @@
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "update:deps": "pnpm update -i --latest",
-    "dev": "pnpm -r run dev",
+    "dev": "pnpm -r run dev --parallel",
     "build": "pnpm -r run build",
     "version": "npm run build && pnpx changeset && pnpx changeset version",
     "publish": "pnpx changeset publish"

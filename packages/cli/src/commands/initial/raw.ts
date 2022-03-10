@@ -14,6 +14,32 @@ insert_final_newline = true
 trim_trailing_whitespace = false
 `
 
+export const TSCONFIG_JSON_CONTENT = `{
+  "extends": "@chenyueban/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/",
+    "dist/"
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+`
+export const TSCONFIG_NODE_JSON_CONTENT = `{
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext",
+    "moduleResolution": "node"
+  }
+}
+`
+
 export const ESLINTRC_VANILLA = `{
   "extends": "./node_modules/@chenyueban/lint/src/vanilla.cjs"
 }
