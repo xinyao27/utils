@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.1.0
+
+### Minor Changes
+
+- 优化提示语 增加版本号显示
+
 ## 2.0.0
 
 ### Major Changes
