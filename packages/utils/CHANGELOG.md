@@ -1,5 +1,11 @@
 # @chenyueban/utils
 
+## 2.0.1
+
+### Patch Changes
+
+- update eslint config
+
 ## 2.0.0
 
 ### Major Changes
