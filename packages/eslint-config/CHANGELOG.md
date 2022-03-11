@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.2
+
+### Patch Changes
+
+- fix package.json files error
+
 ## 1.0.1
 
 ### Patch Changes
