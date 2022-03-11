@@ -20,9 +20,9 @@
     "lint": "eslint . --fix",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
-    "publish": "pnpx changeset publish",
+    "publish": "pnpm run build && pnpx changeset publish",
     "update:deps": "pnpm update -i --latest",
-    "version": "npm run build && pnpx changeset && pnpx changeset version"
+    "version": "pnpx changeset && pnpx changeset version"
   },
   "devDependencies": {
     "@changesets/cli": "^2.21.1",

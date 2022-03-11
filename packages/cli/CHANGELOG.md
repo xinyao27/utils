@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.2.2
+
+### Patch Changes
+
+- update version
+
 ## 2.2.1
 
 ### Patch Changes
