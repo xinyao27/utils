@@ -1,37 +1,32 @@
 {
   "name": "@chenyueban/cli",
-  "version": "2.1.0",
-  "description": "Chenyueban CLI",
   "type": "module",
-  "engines": {
-    "node": ">=16",
-    "npm": ">=7"
+  "version": "2.1.0",
+  "keywords": [
+    "cli",
+    "git"
+  ],
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
   },
   "bin": {
     "c": "./dist/index.js"
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "dev": "tsup src/index.ts --format esm --watch",
-    "build": "tsup src/index.ts --format esm"
+    "build": "tsup src/index.ts --format esm",
+    "dev": "tsup src/index.ts --format esm --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
-  },
-  "keywords": [
-    "cli",
-    "git"
-  ],
-  "author": {
-    "name": "chenyueban",
-    "email": "jasonchan0527@gmail.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
-  },
-  "homepage": "https://github.com/chenyueban/utils#readme",
   "dependencies": {
     "@antfu/install-pkg": "^0.1.0",
     "@chenyueban/utils": "workspace:*",
@@ -46,6 +41,10 @@
   "devDependencies": {
     "@chenyueban/tsconfig": "workspace:*",
     "@types/prompts": "^2.0.14"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
   },
   "publishConfig": {
     "access": "public"

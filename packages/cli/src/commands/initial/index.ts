@@ -11,10 +11,7 @@ import {
   TSCONFIG_JSON_CONTENT,
   TSCONFIG_NODE_JSON_CONTENT,
   COMMITLINTRC,
-  ESLINTRC_VANILLA,
-  ESLINTRC_REACT,
-  ESLINTRC_VUE,
-  PRETTIERRC,
+  ESLINTRC,
   NPMRC,
   EDITOR_CONFIG,
   LINTSTAGEDRC,
@@ -89,17 +86,10 @@ const commitPackages: BootstrapConfig[] = [
 ]
 const lintPackages: BootstrapConfig[] = [
   {
-    packageName: `@chenyueban/lint`,
+    packageName: `@chenyueban/eslint-config`,
   },
   {
     packageName: `eslint`,
-  },
-  {
-    packageName: `prettier`,
-    configFile: {
-      configFileName: `.prettierrc`,
-      configFileRaw: PRETTIERRC,
-    },
   },
 ]
 const toolsPackages: BootstrapConfig[] = [
@@ -231,44 +221,18 @@ export const chain: Chain = [
     ],
     actions: [
       {
-        name: `vanilla`,
         fn: async (cwd) => {
           await bootstrap(cwd, [
             {
               configFile: {
                 configFileName: `.eslintrc`,
-                configFileRaw: ESLINTRC_VANILLA,
+                configFileRaw: ESLINTRC,
               },
             },
           ])
         },
       },
-      {
-        name: `react`,
-        fn: async (cwd) => {
-          await bootstrap(cwd, [
-            {
-              configFile: {
-                configFileName: `.eslintrc`,
-                configFileRaw: ESLINTRC_REACT,
-              },
-            },
-          ])
-        },
-      },
-      {
-        name: `vue`,
-        fn: async (cwd) => {
-          await bootstrap(cwd, [
-            {
-              configFile: {
-                configFileName: `.eslintrc`,
-                configFileRaw: ESLINTRC_VUE,
-              },
-            },
-          ])
-        },
-      },
+
     ],
   },
   {

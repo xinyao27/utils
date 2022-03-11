@@ -1,45 +1,44 @@
 {
   "name": "@chenyueban/utils",
-  "version": "2.0.0",
-  "description": "Chenyueban utils",
   "type": "module",
+  "version": "2.0.0",
+  "keywords": [
+    "utils"
+  ],
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
+  },
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },
-  "types": "./dist/index.d.ts",
-  "engines": {
-    "node": ">=16",
-    "npm": ">=7"
-  },
   "scripts": {
     "prebuild": "rimraf dist",
-    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
-    "build": "tsup src/index.ts --format esm,cjs --dts"
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
-  },
-  "keywords": [
-    "utils"
-  ],
-  "author": {
-    "name": "chenyueban",
-    "email": "jasonchan0527@gmail.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
-  },
-  "homepage": "https://github.com/chenyueban/utils#readme",
   "dependencies": {
     "consola": "^2.15.3"
   },
   "devDependencies": {
     "@chenyueban/tsconfig": "workspace:*"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
   },
   "publishConfig": {
     "access": "public"

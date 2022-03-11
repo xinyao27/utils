@@ -1,29 +1,28 @@
 {
   "name": "utils",
   "version": "1.0.0",
-  "description": "JavaScript/TypeScript utils",
-  "scripts": {
-    "prepare": "husky install",
-    "preinstall": "npx only-allow pnpm",
-    "update:deps": "pnpm update -i --latest",
-    "dev": "pnpm -r run dev --parallel",
-    "build": "pnpm -r run build",
-    "version": "npm run build && pnpx changeset && pnpx changeset version",
-    "publish": "pnpx changeset publish"
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chenyueban/utils.git"
   },
+  "license": "MIT",
   "author": {
     "name": "chenyueban",
     "email": "jasonchan0527@gmail.com"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run dev --parallel",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky install",
+    "publish": "pnpx changeset publish",
+    "update:deps": "pnpm update -i --latest",
+    "version": "npm run build && pnpx changeset && pnpx changeset version"
   },
-  "homepage": "https://github.com/chenyueban/utils#readme",
   "devDependencies": {
     "@changesets/cli": "^2.21.1",
     "@commitlint/cli": "^16.2.1",
@@ -32,7 +31,6 @@
     "eslint": "^8.10.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.5",
-    "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "tsup": "^5.12.0"
   }

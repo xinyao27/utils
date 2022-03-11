@@ -1,45 +1,45 @@
 {
   "name": "@chenyueban/tsconfig",
+  "type": "module",
   "version": "2.0.0",
   "description": "tsconfig.json inheritance via Node.js packages",
-  "tsconfig": "tsconfig.json",
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./tsconfig.json",
-      "require": "./tsconfig.json"
-    }
-  },
-  "engines": {
-    "node": ">=16",
-    "npm": ">=7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
-  },
   "keywords": [
     "tsconfig",
     "base",
     "inheritance",
     "share"
   ],
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "chenyueban",
     "email": "jasonchan0527@gmail.com"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
   },
-  "homepage": "https://github.com/chenyueban/utils#readme",
-  "peerDependencies": {
-    "typescript": "^4.4.2"
+  "exports": {
+    ".": {
+      "import": "./tsconfig.json",
+      "require": "./tsconfig.json"
+    }
   },
   "files": [
     "tsconfig.json"
   ],
+  "peerDependencies": {
+    "typescript": "^4.4.2"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "tsconfig": "tsconfig.json"
 }

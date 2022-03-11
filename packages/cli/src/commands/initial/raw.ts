@@ -40,31 +40,13 @@ export const TSCONFIG_NODE_JSON_CONTENT = `{
 }
 `
 
-export const ESLINTRC_VANILLA = `{
-  "extends": "./node_modules/@chenyueban/lint/src/vanilla.cjs"
-}
-`
-export const ESLINTRC_REACT = `{
-  "extends": "./node_modules/@chenyueban/lint/src/react.cjs"
-}
-`
-export const ESLINTRC_VUE = `{
-  "extends": "./node_modules/@chenyueban/lint/src/vue.cjs"
-}
-`
-
-export const PRETTIERRC = `{
-  "singleQuote": true,
-  "semi": false,
-  "endOfLine": "lf"
+export const ESLINTRC = `{
+  "extends": "@chenyueban"
 }
 `
 
 export const LINTSTAGEDRC = `{
-  "*.{md,json,yml}": ["prettier --write", "git add"],
-  "*.{js,jsx,vue,html}": ["prettier --write", "eslint --fix", "git add"],
-  "*.ts?(x)": [
-    "prettier --parser=typescript --write",
+  "*.{js?(x),ts?(x),vue,html,md,json,yml}": [
     "eslint --fix",
     "git add"
   ]
