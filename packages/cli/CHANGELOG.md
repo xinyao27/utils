@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.2.3
+
+### Patch Changes
+
+- update tsconfig
+
 ## 2.2.2
 
 ### Patch Changes
