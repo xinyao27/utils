@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.1
+
+### Patch Changes
+
+- fix eslint typescript overrides error
+
 ## 1.0.0
 
 ### Major Changes

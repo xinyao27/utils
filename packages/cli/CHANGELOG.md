@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.2.1
+
+### Patch Changes
+
+- fix eslint typescript overrides error
+
 ## 2.2.0
 
 ### Minor Changes
