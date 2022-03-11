@@ -27,16 +27,15 @@ async function main() {
   const response = await prompts(chain)
   const { select } = response
   const response2 = await prompts(
-    question.find((v) => v.name === select)!.chain
+    question.find(v => v.name === select)!.chain,
   )
   const actions = getActionsFromResponse(
     response2,
-    question.find((v) => v.name === select)!.chain
+    question.find(v => v.name === select)!.chain,
   )
 
-  for (const action of actions) {
+  for (const action of actions)
     await action?.(CWD)
-  }
 }
 
 main().catch((e) => {

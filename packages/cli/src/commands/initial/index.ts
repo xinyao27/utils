@@ -5,56 +5,58 @@ import fs from 'fs/promises'
 import { existsSync } from 'fs'
 import { execa } from 'execa'
 
-import { setNpmScripts, bootstrap, BootstrapConfig } from './utils'
+import type { Chain, Choice, Question } from '../../utils'
+import type { BootstrapConfig } from './utils'
+import { bootstrap, setNpmScripts } from './utils'
 import {
+  COMMITLINTRC,
   CZRC,
+  EDITOR_CONFIG,
+  ESLINTRC,
+  GITIGNORE,
+  LINTSTAGEDRC,
+  NPMRC,
+  RELEASE_IT,
   TSCONFIG_JSON_CONTENT,
   TSCONFIG_NODE_JSON_CONTENT,
-  COMMITLINTRC,
-  ESLINTRC,
-  NPMRC,
-  EDITOR_CONFIG,
-  LINTSTAGEDRC,
-  RELEASE_IT,
-  GITIGNORE,
 } from './raw'
-import type { Choice, Chain, Question } from '../../utils'
 
 const basePackages: BootstrapConfig[] = [
   {
-    afterInstall: async (cwd) => {
-      if (!existsSync(path.join(cwd, '.git'))) {
+    afterInstall: async(cwd) => {
+      if (!existsSync(path.join(cwd, '.git')))
         await execa('git', ['init'], { cwd })
-      }
+
+      await setNpmScripts(cwd, { preinstall: 'npx only-allow pnpm' })
       await setNpmScripts(cwd, { 'update:deps': 'pnpm update -i --latest' })
     },
   },
   {
     configFile: {
-      configFileName: `.npmrc`,
+      configFileName: '.npmrc',
       configFileRaw: NPMRC,
     },
   },
   {
     configFile: {
-      configFileName: `.editorconfig`,
+      configFileName: '.editorconfig',
       configFileRaw: EDITOR_CONFIG,
     },
   },
 ]
 const typescriptPackages: BootstrapConfig[] = [
   {
-    packageName: `@chenyueban/tsconfig`,
+    packageName: '@chenyueban/tsconfig',
   },
   {
     configFile: {
-      configFileName: `tsconfig.json`,
+      configFileName: 'tsconfig.json',
       configFileRaw: TSCONFIG_JSON_CONTENT,
     },
   },
   {
     configFile: {
-      configFileName: `tsconfig.node.json`,
+      configFileName: 'tsconfig.node.json',
       configFileRaw: TSCONFIG_NODE_JSON_CONTENT,
     },
   },
@@ -62,40 +64,51 @@ const typescriptPackages: BootstrapConfig[] = [
 const commitPackages: BootstrapConfig[] = [
   {
     configFile: {
-      configFileName: `.gitignore`,
+      configFileName: '.gitignore',
       configFileRaw: GITIGNORE,
     },
   },
   {
-    packageName: `commitizen`,
+    packageName: 'commitizen',
   },
   {
-    packageName: `cz-conventional-changelog`,
+    packageName: 'cz-conventional-changelog',
     configFile: {
-      configFileName: `.czrc`,
+      configFileName: '.czrc',
       configFileRaw: CZRC,
     },
   },
   {
-    packageName: `@commitlint/cli`,
+    packageName: '@commitlint/cli',
     configFile: {
-      configFileName: `.commitlintrc`,
+      configFileName: '.commitlintrc',
       configFileRaw: COMMITLINTRC,
     },
   },
 ]
-const lintPackages: BootstrapConfig[] = [
+const eslintPackages: BootstrapConfig[] = [
   {
-    packageName: `@chenyueban/eslint-config`,
+    packageName: '@chenyueban/eslint-config',
   },
   {
-    packageName: `eslint`,
+    packageName: 'eslint',
+  },
+  {
+    configFile: {
+      configFileName: '.eslintrc',
+      configFileRaw: ESLINTRC,
+    },
+  },
+  {
+    afterInstall: async(cwd) => {
+      await setNpmScripts(cwd, { lint: 'eslint . --fix' })
+    },
   },
 ]
 const toolsPackages: BootstrapConfig[] = [
   {
-    packageName: `husky`,
-    afterInstall: async (cwd) => {
+    packageName: 'husky',
+    afterInstall: async(cwd) => {
       await setNpmScripts(cwd, { prepare: 'husky install' })
       await execa('npm', ['run', 'prepare'], { cwd })
       if (existsSync(path.join(cwd, '.husky/pre-commit'))) {
@@ -103,29 +116,30 @@ const toolsPackages: BootstrapConfig[] = [
           path.join(cwd, '.husky/pre-commit'),
           {
             encoding: 'utf-8',
-          }
+          },
         )
         if (!preCommit.includes('npx lint-staged')) {
           await execa(
             'npx',
             ['husky', 'add', '.husky/pre-commit', 'npx lint-staged'],
-            { cwd }
+            { cwd },
           )
         }
-      } else {
+      }
+      else {
         await execa(
           'npx',
           ['husky', 'add', '.husky/pre-commit', 'npx lint-staged'],
-          { cwd }
+          { cwd },
         )
       }
       await execa('git', ['add', '.husky/pre-commit'], { cwd })
     },
   },
   {
-    packageName: `lint-staged`,
+    packageName: 'lint-staged',
     configFile: {
-      configFileName: `.lintstagedrc`,
+      configFileName: '.lintstagedrc',
       configFileRaw: LINTSTAGEDRC,
     },
   },
@@ -146,7 +160,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async (cwd) => {
+        fn: async(cwd) => {
           await bootstrap(cwd, basePackages)
         },
       },
@@ -161,7 +175,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async (cwd) => {
+        fn: async(cwd) => {
           await bootstrap(cwd, typescriptPackages)
         },
       },
@@ -176,63 +190,25 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async (cwd) => {
+        fn: async(cwd) => {
           await bootstrap(cwd, commitPackages)
         },
       },
     ],
   },
   {
-    name: 'lint',
+    name: 'eslint',
     type: 'toggle',
-    message: 'eslint and prettier',
+    message: 'eslint',
     initial: true,
     active: 'yes',
     inactive: 'no',
     actions: [
       {
-        fn: async (cwd) => {
-          await bootstrap(cwd, lintPackages)
+        fn: async(cwd) => {
+          await bootstrap(cwd, eslintPackages)
         },
       },
-    ],
-  },
-  {
-    name: 'lintType',
-    type: (prev) => (prev ? 'select' : null),
-    message: 'choose the framework',
-    initial: 0,
-    choices: [
-      {
-        title: 'vanilla',
-        description: 'vanilla',
-        value: 'vanilla',
-      },
-      {
-        title: 'react',
-        description: 'react',
-        value: 'react',
-      },
-      {
-        title: 'vue',
-        description: 'vue',
-        value: 'vue',
-      },
-    ],
-    actions: [
-      {
-        fn: async (cwd) => {
-          await bootstrap(cwd, [
-            {
-              configFile: {
-                configFileName: `.eslintrc`,
-                configFileRaw: ESLINTRC,
-              },
-            },
-          ])
-        },
-      },
-
     ],
   },
   {
@@ -244,7 +220,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async (cwd) => {
+        fn: async(cwd) => {
           await bootstrap(cwd, toolsPackages)
         },
       },
@@ -261,7 +237,7 @@ export const chain: Chain = [
   },
   {
     name: 'releaseType',
-    type: (prev) => (prev ? 'select' : null),
+    type: prev => (prev ? 'select' : null),
     message: 'choose the version tool',
     initial: 0,
     choices: [
@@ -279,38 +255,31 @@ export const chain: Chain = [
     actions: [
       {
         name: 'release-it',
-        fn: async (cwd) => {
+        fn: async(cwd) => {
           await bootstrap(cwd, [
             {
-              packageName: `release-it`,
-              afterInstall: async (c) => {
+              packageName: 'release-it',
+              afterInstall: async(c) => {
                 await setNpmScripts(c, { release: 'release-it' })
               },
               configFile: {
-                configFileName: `.release-it.json`,
+                configFileName: '.release-it.json',
                 configFileRaw: RELEASE_IT,
               },
             },
-          ])
-        },
-      },
-      {
-        name: 'release-it',
-        fn: async (cwd) => {
-          await bootstrap(cwd, [
             {
-              packageName: `@release-it/conventional-changelog`,
+              packageName: '@release-it/conventional-changelog',
             },
           ])
         },
       },
       {
         name: 'changesets',
-        fn: async (cwd) => {
+        fn: async(cwd) => {
           await bootstrap(cwd, [
             {
-              packageName: `@changesets/cli`,
-              afterInstall: async (c) => {
+              packageName: '@changesets/cli',
+              afterInstall: async(c) => {
                 await execa('npx', ['changeset', 'init'], { cwd: c })
               },
             },

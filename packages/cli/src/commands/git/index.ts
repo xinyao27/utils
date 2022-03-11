@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import clipboard from 'clipboardy'
 import { consola } from '@chenyueban/utils'
 
-import type { Choice, Chain, Question } from '../../utils'
+import type { Chain, Choice, Question } from '../../utils'
 
 /**
  * 获取当天的 git commits
@@ -45,15 +45,15 @@ export const chain: Chain = {
   actions: [
     {
       name: 'subject',
-      fn: async () => {
-        const str = (await git()).map((commit) => commit.subject).join('\n')
+      fn: async() => {
+        const str = (await git()).map(commit => commit.subject).join('\n')
         clipboard.write(str)
         consola.info('已经帮你复制好啦~ \n', str)
       },
     },
     {
       name: 'full',
-      fn: async () => {
+      fn: async() => {
         const commits = await git()
         consola.info(commits)
       },

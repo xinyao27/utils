@@ -19,6 +19,9 @@
     "url": "git+https://github.com/chenyueban/utils.git"
   },
   "main": "./src/index.js",
+  "files": [
+    "./src/index.js"
+  ],
   "peerDependencies": {
     "eslint": "^8.0.0"
   },

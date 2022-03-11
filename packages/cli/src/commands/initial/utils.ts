@@ -6,18 +6,17 @@ import { consola } from '@chenyueban/utils'
 
 export async function setNpmScripts(
   cwd: string,
-  scripts: Record<string, string>
+  scripts: Record<string, string>,
 ) {
   const pkgFile = await pkgUp({ cwd })
   if (pkgFile) {
     const pkgJson = await fs.readFile(pkgFile, { encoding: 'utf8' })
     const pkg = JSON.parse(pkgJson)
     if (pkg.scripts) {
-      // eslint-disable-next-line guard-for-in
-      for (const key in scripts) {
+      for (const key in scripts)
         pkg.scripts[key] = scripts[key]
-      }
-    } else {
+    }
+    else {
       pkg.scripts = scripts
     }
     await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2))
@@ -44,9 +43,8 @@ export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
       })
     }
 
-    if (afterInstall) {
+    if (afterInstall)
       await afterInstall(cwd)
-    }
 
     if (configFile) {
       const { configFileName, configFileRaw } = configFile

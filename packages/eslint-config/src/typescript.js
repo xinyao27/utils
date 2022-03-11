@@ -1,9 +1,11 @@
+const basic = require('./basic')
+
 module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
-    './base.js',
+    './basic.js',
   ],
-  overrides: vanilla.overrides,
+  overrides: basic.overrides,
   rules: {
     'import/named': 'off',
 
