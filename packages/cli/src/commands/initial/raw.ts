@@ -25,18 +25,15 @@ export const TSCONFIG_JSON_CONTENT = `{
   "exclude": [
     "node_modules/",
     "dist/"
-  ],
-  "references": [
-    { "path": "./tsconfig.node.json" }
   ]
 }
 `
 export const TSCONFIG_NODE_JSON_CONTENT = `{
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "module": "esnext",
-    "moduleResolution": "node"
-  }
+  },
+  "include": []
 }
 `
 
