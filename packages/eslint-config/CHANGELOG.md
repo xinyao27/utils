@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.4
+
+### Patch Changes
+
+- typescript 调整部分配置
+
 ## 1.0.3
 
 ### Patch Changes
