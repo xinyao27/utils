@@ -5,7 +5,15 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     './basic.js',
   ],
-  overrides: basic.overrides,
+  overrides: [
+    ...basic.overrides,
+    {
+      files: ['*.ts'],
+      rules: {
+        'no-undef': 'off',
+      },
+    },
+  ],
   rules: {
     'import/named': 'off',
 
