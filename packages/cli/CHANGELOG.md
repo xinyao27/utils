@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.0
+
+### Minor Changes
+
+- update eslint config and fix overwrite file logic
+
 ## 2.2.3
 
 ### Patch Changes

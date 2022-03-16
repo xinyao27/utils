@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.5
+
+### Patch Changes
+
+- update eslint config and fix overwrite file logic
+
 ## 1.0.4
 
 ### Patch Changes
