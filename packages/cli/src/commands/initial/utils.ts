@@ -1,5 +1,6 @@
-import fs from 'fs/promises'
-import path from 'path'
+import { readFile, writeFile } from 'fs/promises'
+import { existsSync } from 'fs'
+import { join } from 'path'
 import { pkgUp } from 'pkg-up'
 import { installPackage } from '@antfu/install-pkg'
 import { consola } from '@chenyueban/utils'
@@ -10,16 +11,12 @@ export async function setNpmScripts(
 ) {
   const pkgFile = await pkgUp({ cwd })
   if (pkgFile) {
-    const pkgJson = await fs.readFile(pkgFile, { encoding: 'utf8' })
+    const pkgJson = await readFile(pkgFile, { encoding: 'utf8' })
     const pkg = JSON.parse(pkgJson)
-    if (pkg.scripts) {
-      for (const key in scripts)
-        pkg.scripts[key] = scripts[key]
-    }
-    else {
-      pkg.scripts = scripts
-    }
-    await fs.writeFile(pkgFile, JSON.stringify(pkg, null, 2))
+    if (pkg.scripts) for (const key in scripts) pkg.scripts[key] = scripts[key]
+    else pkg.scripts = scripts
+
+    await writeFile(pkgFile, JSON.stringify(pkg, null, 2))
   }
 }
 
@@ -45,14 +42,13 @@ export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
       })
     }
 
-    if (afterInstall)
-      await afterInstall(cwd)
+    if (afterInstall) await afterInstall(cwd)
 
     if (configFile) {
       const { configFileName, configFileRaw, override } = configFile
-      if (override) {
-        const configFilePath = path.join(cwd, configFileName)
-        await fs.writeFile(configFilePath, configFileRaw)
+      const configFilePath = join(cwd, configFileName)
+      if (override || !existsSync(configFilePath)) {
+        await writeFile(configFilePath, configFileRaw)
         consola.info(`auto generated ${configFileName}`)
       }
     }

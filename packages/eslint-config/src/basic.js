@@ -183,6 +183,13 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'no-return-await': 'off',
     'space-before-function-paren': ['error', 'never'],
+    'max-len': ['error', {
+      code: 80,
+      tabWidth: 2,
+      ignoreUrls: true,
+      ignoreStrings: true,
+      ignoreTemplateLiterals: true,
+    }],
 
     // es6
     'no-var': 'error',
@@ -259,7 +266,8 @@ module.exports = {
     'unicorn/no-new-buffer': 'error',
     // Keep regex literals safe!
     'unicorn/no-unsafe-regex': 'off',
-    // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
+    // Lowercase number formatting for octal, hex, binary
+    // (0x1'error' instead of 0X1'error')
     'unicorn/number-literal-case': 'error',
     // ** instead of Math.pow()
     'unicorn/prefer-exponentiation-operator': 'error',
