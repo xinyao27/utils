@@ -22,7 +22,9 @@
     "prepare": "husky install",
     "publish": "pnpm run build && pnpx changeset publish",
     "update:deps": "pnpm update -i --latest",
-    "version": "pnpx changeset && pnpx changeset version"
+    "version": "pnpx changeset && pnpx changeset version",
+    "link": "cd packages/cli && npm link",
+    "unlink": "cd packages/cli && npm unlink"
   },
   "devDependencies": {
     "@changesets/cli": "^2.21.1",
