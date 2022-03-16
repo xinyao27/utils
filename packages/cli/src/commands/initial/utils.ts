@@ -24,11 +24,13 @@ export async function setNpmScripts(
 }
 
 export interface BootstrapConfig {
-  afterInstall?: (cwd: string) => Promise<void>
   packageName?: string
+  afterInstall?: (cwd: string) => Promise<void>
   configFile?: {
     configFileName: string
     configFileRaw: string
+    // Whether to overwrite the original file
+    override?: boolean
   }
 }
 export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
@@ -47,10 +49,12 @@ export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
       await afterInstall(cwd)
 
     if (configFile) {
-      const { configFileName, configFileRaw } = configFile
-      const configFilePath = path.join(cwd, configFileName)
-      await fs.writeFile(configFilePath, configFileRaw)
-      consola.info(`auto generated ${configFileName}`)
+      const { configFileName, configFileRaw, override } = configFile
+      if (override) {
+        const configFilePath = path.join(cwd, configFileName)
+        await fs.writeFile(configFilePath, configFileRaw)
+        consola.info(`auto generated ${configFileName}`)
+      }
     }
   }
 }

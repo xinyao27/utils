@@ -33,9 +33,10 @@ async function main() {
     response2,
     question.find(v => v.name === select)!.chain,
   )
+  const { override } = response2
 
   for (const action of actions)
-    await action?.(CWD)
+    await action?.(CWD, override)
 }
 
 main().catch((e) => {

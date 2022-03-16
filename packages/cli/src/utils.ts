@@ -2,7 +2,7 @@ import type { Answers, Choice, PromptObject } from 'prompts'
 
 export interface Action {
   name?: string
-  fn?: (cwd: string) => Promise<void>
+  fn?: (cwd: string, override?: boolean) => Promise<void>
 }
 
 export { Choice }
@@ -15,7 +15,7 @@ export interface Question {
   chain: Chain
 }
 export function getActionsFromResponse(response: Answers<any>, chain: Chain) {
-  const actions: ((cwd: string) => Promise<void>)[] = []
+  const actions: ((cwd: string, override: boolean) => Promise<void>)[] = []
   if (Array.isArray(chain)) {
     for (const name in response) {
       if (Object.prototype.hasOwnProperty.call(response, name)) {

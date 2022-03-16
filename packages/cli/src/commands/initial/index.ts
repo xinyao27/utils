@@ -21,7 +21,7 @@ import {
   TSCONFIG_NODE_JSON_CONTENT,
 } from './raw'
 
-const basePackages: BootstrapConfig[] = [
+const basePackages = (override?: boolean): BootstrapConfig[] => [
   {
     afterInstall: async(cwd) => {
       if (!existsSync(path.join(cwd, '.git')))
@@ -35,16 +35,18 @@ const basePackages: BootstrapConfig[] = [
     configFile: {
       configFileName: '.npmrc',
       configFileRaw: NPMRC,
+      override,
     },
   },
   {
     configFile: {
       configFileName: '.editorconfig',
       configFileRaw: EDITOR_CONFIG,
+      override,
     },
   },
 ]
-const typescriptPackages: BootstrapConfig[] = [
+const typescriptPackages = (override?: boolean): BootstrapConfig[] => [
   {
     packageName: '@chenyueban/tsconfig',
   },
@@ -52,20 +54,23 @@ const typescriptPackages: BootstrapConfig[] = [
     configFile: {
       configFileName: 'tsconfig.json',
       configFileRaw: TSCONFIG_JSON_CONTENT,
+      override,
     },
   },
   {
     configFile: {
       configFileName: 'tsconfig.node.json',
       configFileRaw: TSCONFIG_NODE_JSON_CONTENT,
+      override,
     },
   },
 ]
-const commitPackages: BootstrapConfig[] = [
+const commitPackages = (override?: boolean): BootstrapConfig[] => [
   {
     configFile: {
       configFileName: '.gitignore',
       configFileRaw: GITIGNORE,
+      override,
     },
   },
   {
@@ -76,6 +81,7 @@ const commitPackages: BootstrapConfig[] = [
     configFile: {
       configFileName: '.czrc',
       configFileRaw: CZRC,
+      override,
     },
   },
   {
@@ -83,10 +89,11 @@ const commitPackages: BootstrapConfig[] = [
     configFile: {
       configFileName: '.commitlintrc',
       configFileRaw: COMMITLINTRC,
+      override,
     },
   },
 ]
-const eslintPackages: BootstrapConfig[] = [
+const eslintPackages = (override?: boolean): BootstrapConfig[] => [
   {
     packageName: '@chenyueban/eslint-config',
   },
@@ -97,6 +104,7 @@ const eslintPackages: BootstrapConfig[] = [
     configFile: {
       configFileName: '.eslintrc',
       configFileRaw: ESLINTRC,
+      override,
     },
   },
   {
@@ -105,7 +113,7 @@ const eslintPackages: BootstrapConfig[] = [
     },
   },
 ]
-const toolsPackages: BootstrapConfig[] = [
+const toolsPackages = (override?: boolean): BootstrapConfig[] => [
   {
     packageName: 'husky',
     afterInstall: async(cwd) => {
@@ -141,6 +149,7 @@ const toolsPackages: BootstrapConfig[] = [
     configFile: {
       configFileName: '.lintstagedrc',
       configFileRaw: LINTSTAGEDRC,
+      override,
     },
   },
 ]
@@ -160,8 +169,8 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd) => {
-          await bootstrap(cwd, basePackages)
+        fn: async(cwd, override) => {
+          await bootstrap(cwd, basePackages(override))
         },
       },
     ],
@@ -175,8 +184,8 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd) => {
-          await bootstrap(cwd, typescriptPackages)
+        fn: async(cwd, override) => {
+          await bootstrap(cwd, typescriptPackages(override))
         },
       },
     ],
@@ -190,8 +199,8 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd) => {
-          await bootstrap(cwd, commitPackages)
+        fn: async(cwd, override) => {
+          await bootstrap(cwd, commitPackages(override))
         },
       },
     ],
@@ -205,8 +214,8 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd) => {
-          await bootstrap(cwd, eslintPackages)
+        fn: async(cwd, override) => {
+          await bootstrap(cwd, eslintPackages(override))
         },
       },
     ],
@@ -220,8 +229,8 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd) => {
-          await bootstrap(cwd, toolsPackages)
+        fn: async(cwd, override) => {
+          await bootstrap(cwd, toolsPackages(override))
         },
       },
     ],
@@ -255,7 +264,7 @@ export const chain: Chain = [
     actions: [
       {
         name: 'release-it',
-        fn: async(cwd) => {
+        fn: async(cwd, override) => {
           await bootstrap(cwd, [
             {
               packageName: 'release-it',
@@ -265,6 +274,7 @@ export const chain: Chain = [
               configFile: {
                 configFileName: '.release-it.json',
                 configFileRaw: RELEASE_IT,
+                override,
               },
             },
             {
@@ -287,6 +297,14 @@ export const chain: Chain = [
         },
       },
     ],
+  },
+  {
+    name: 'override',
+    type: 'toggle',
+    message: 'do you need overwriting files',
+    initial: true,
+    active: 'yes',
+    inactive: 'no',
   },
 ]
 export const question: Question = {
