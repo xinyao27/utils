@@ -12,7 +12,6 @@ module.exports = {
     'react/self-closing-comp': ['error'],
 
     // jsx
-    'react/jsx-child-element-spacing': ['error'],
     'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
     'react/jsx-closing-tag-location': ['error'],
     'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never', propElementValues: 'always' }],
