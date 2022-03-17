@@ -30,11 +30,7 @@ module.exports = {
     '!.vscode',
   ],
   plugins: ['html', 'unicorn'],
-  settings: {
-    'import/resolver': {
-      node: { extensions: ['.js', '.mjs', '.ts', '.d.ts'] },
-    },
-  },
+  settings: { 'import/resolver': { node: { extensions: ['.js', '.mjs', '.ts', '.d.ts'] } } },
   overrides: [
     {
       files: ['*.json', '*.json5'],
@@ -48,9 +44,7 @@ module.exports = {
     {
       files: ['*.yaml', '*.yml'],
       parser: 'yaml-eslint-parser',
-      rules: {
-        'spaced-comment': 'off',
-      },
+      rules: { 'spaced-comment': 'off' },
     },
     {
       files: ['package.json'],
@@ -101,27 +95,19 @@ module.exports = {
     },
     {
       files: ['*.d.ts'],
-      rules: {
-        'import/no-duplicates': 'off',
-      },
+      rules: { 'import/no-duplicates': 'off' },
     },
     {
       files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
+      rules: { '@typescript-eslint/no-var-requires': 'off' },
     },
     {
       files: ['scripts/**/*.*', 'cli.*'],
-      rules: {
-        'no-console': 'off',
-      },
+      rules: { 'no-console': 'off' },
     },
     {
       files: ['*.test.ts', '*.test.js', '*.spec.ts', '*.spec.js'],
-      rules: {
-        'no-unused-expressions': 'off',
-      },
+      rules: { 'no-unused-expressions': 'off' },
     },
     {
       // Code blocks in markdown file
@@ -183,16 +169,20 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'no-return-await': 'off',
     'space-before-function-paren': ['error', 'never'],
-    'max-len': ['error', {
-      code: 80,
-      tabWidth: 2,
-      ignoreComments: true,
-      ignoreTrailingComments: true,
-      ignoreUrls: true,
-      ignoreStrings: true,
-      ignoreTemplateLiterals: true,
-      ignoreRegExpLiterals: true,
-    }],
+    'max-len': [
+      'error', {
+        code: 80,
+        tabWidth: 2,
+        ignoreComments: true,
+        ignoreTrailingComments: true,
+        ignoreUrls: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true,
+      },
+    ],
+    'array-bracket-newline': ['error', { multiline: true }],
+    'object-curly-newline': ['error', { multiline: true }],
 
     // es6
     'no-var': 'error',
