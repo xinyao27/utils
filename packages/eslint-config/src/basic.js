@@ -171,7 +171,7 @@ module.exports = {
     'space-before-function-paren': ['error', 'never'],
     'max-len': [
       'error', {
-        code: 80,
+        code: 120,
         tabWidth: 2,
         ignoreComments: true,
         ignoreTrailingComments: true,
@@ -183,6 +183,8 @@ module.exports = {
     ],
     'array-bracket-newline': ['error', { multiline: true }],
     'object-curly-newline': ['error', { multiline: true }],
+    'function-paren-newline': ['error', 'multiline'],
+    'function-call-argument-newline': ['error', 'consistent'],
 
     // es6
     'no-var': 'error',

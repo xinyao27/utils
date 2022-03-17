@@ -1,19 +1,38 @@
 module.exports = {
   extends: [
-    'plugin:react/recommended',
     './typescript.js',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
   ],
-  settings: {
-    react: {
-      version: '17.0',
-    },
-  },
+  settings: { react: { version: '17.0' } },
   rules: {
+    'react/no-array-index-key': ['error'],
     'react/prop-types': 'off',
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
+    'react/self-closing-comp': ['error'],
+
+    // jsx
+    'react/jsx-child-element-spacing': ['error'],
     'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
+    'react/jsx-closing-tag-location': ['error'],
+    'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never', propElementValues: 'always' }],
+    'react/jsx-curly-newline': ['error', 'consistent'],
+    'react/jsx-curly-spacing': ['error', { when: 'never', children: true }],
+    'react/jsx-equals-spacing': ['error'],
+    'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
+    'react/jsx-max-props-per-line': ['error'],
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-sort-props': ['error'],
+    'react/jsx-wrap-multilines': [
+      'error', {
+        declaration: 'parens-new-line',
+        assignment: 'parens-new-line',
+        return: 'parens-new-line',
+        arrow: 'parens-new-line',
+        condition: 'parens-new-line',
+        logical: 'parens-new-line',
+        prop: 'parens-new-line',
+      },
+    ],
   },
 }
