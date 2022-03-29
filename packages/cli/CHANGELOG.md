@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.1
+
+### Patch Changes
+
+- git commit 记录不设置最大上限
+
 ## 2.3.0
 
 ### Minor Changes

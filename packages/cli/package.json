@@ -1,7 +1,7 @@
 {
   "name": "@chenyueban/cli",
   "type": "module",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "keywords": [
     "cli",
     "git"
