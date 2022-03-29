@@ -17,6 +17,7 @@ async function git() {
     author,
     since: dayjs().startOf('date').toISOString(),
     until: dayjs().endOf('date').toISOString(),
+    number: 9999,
   })
 }
 
