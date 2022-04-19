@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.2
+
+### Patch Changes
+
+- lint 加入 @commitlint/config-conventional 安装
+
 ## 2.3.1
 
 ### Patch Changes
