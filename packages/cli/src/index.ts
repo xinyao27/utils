@@ -26,9 +26,7 @@ async function main() {
   const question = [gitQuestion, initialQuestion]
   const response = await prompts(chain)
   const { select } = response
-  const response2 = await prompts(
-    question.find(v => v.name === select)!.chain,
-  )
+  const response2 = await prompts(question.find(v => v.name === select)!.chain)
   const actions = getActionsFromResponse(
     response2,
     question.find(v => v.name === select)!.chain,

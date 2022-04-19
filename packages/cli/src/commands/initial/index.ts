@@ -47,9 +47,7 @@ const basePackages = (override?: boolean): BootstrapConfig[] => [
   },
 ]
 const typescriptPackages = (override?: boolean): BootstrapConfig[] => [
-  {
-    packageName: '@chenyueban/tsconfig',
-  },
+  { packageName: '@chenyueban/tsconfig' },
   {
     configFile: {
       configFileName: 'tsconfig.json',
@@ -73,9 +71,7 @@ const commitPackages = (override?: boolean): BootstrapConfig[] => [
       override,
     },
   },
-  {
-    packageName: 'commitizen',
-  },
+  { packageName: 'commitizen' },
   {
     packageName: 'cz-conventional-changelog',
     configFile: {
@@ -92,14 +88,11 @@ const commitPackages = (override?: boolean): BootstrapConfig[] => [
       override,
     },
   },
+  { packageName: '@commitlint/config-conventional' },
 ]
 const eslintPackages = (override?: boolean): BootstrapConfig[] => [
-  {
-    packageName: '@chenyueban/eslint-config',
-  },
-  {
-    packageName: 'eslint',
-  },
+  { packageName: '@chenyueban/eslint-config' },
+  { packageName: 'eslint' },
   {
     configFile: {
       configFileName: '.eslintrc',
@@ -122,9 +115,7 @@ const toolsPackages = (override?: boolean): BootstrapConfig[] => [
       if (existsSync(path.join(cwd, '.husky/pre-commit'))) {
         const preCommit = await fs.readFile(
           path.join(cwd, '.husky/pre-commit'),
-          {
-            encoding: 'utf-8',
-          },
+          { encoding: 'utf-8' },
         )
         if (!preCommit.includes('npx lint-staged')) {
           await execa(
@@ -277,9 +268,7 @@ export const chain: Chain = [
                 override,
               },
             },
-            {
-              packageName: '@release-it/conventional-changelog',
-            },
+            { packageName: '@release-it/conventional-changelog' },
           ])
         },
       },
