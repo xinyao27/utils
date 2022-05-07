@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.3
+
+### Patch Changes
+
+- 更新依赖命令更新
+
 ## 2.3.2
 
 ### Patch Changes
