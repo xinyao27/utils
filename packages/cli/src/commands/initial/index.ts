@@ -28,7 +28,7 @@ const basePackages = (override?: boolean): BootstrapConfig[] => [
         await execa('git', ['init'], { cwd })
 
       await setNpmScripts(cwd, { preinstall: 'npx only-allow pnpm' })
-      await setNpmScripts(cwd, { 'update:deps': 'pnpm update -i --latest' })
+      await setNpmScripts(cwd, { 'update:deps': 'pnpm update -i -r --latest' })
     },
   },
   {
