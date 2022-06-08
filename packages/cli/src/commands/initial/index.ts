@@ -288,6 +288,14 @@ export const chain: Chain = [
     ],
   },
   {
+    name: 'monorepo',
+    type: 'toggle',
+    message: 'use monorepo',
+    initial: false,
+    active: 'yes',
+    inactive: 'no',
+  },
+  {
     name: 'override',
     type: 'toggle',
     message: 'do you need overwriting files',

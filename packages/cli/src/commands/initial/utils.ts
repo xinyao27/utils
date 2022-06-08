@@ -30,15 +30,23 @@ export interface BootstrapConfig {
     override?: boolean
   }
 }
+export const bootstrapTasks: { cwd: string; config: BootstrapConfig }[] = []
 export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
+  configs.forEach((config) => {
+    bootstrapTasks.push({ cwd, config })
+  })
+}
+export async function install(monorepo: boolean) {
   // install packages
-  for (const { packageName, afterInstall, configFile } of configs) {
+  for (const { cwd, config } of bootstrapTasks) {
+    const { packageName, afterInstall, configFile } = config
+
     if (packageName) {
       await installPackage(packageName, {
         dev: true,
         cwd,
         packageManager: 'pnpm',
-        additionalArgs: ['-w'],
+        additionalArgs: [monorepo ? '-w' : ''],
       })
     }
 

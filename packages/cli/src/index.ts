@@ -11,6 +11,7 @@ import {
   question as initialQuestion,
 } from './commands/initial'
 import { type Chain, getActionsFromResponse } from './utils'
+import { install } from './commands/initial/utils'
 
 async function main() {
   const CWD = cwd()
@@ -31,10 +32,11 @@ async function main() {
     response2,
     question.find(v => v.name === select)!.chain,
   )
-  const { override } = response2
+  const { override, monorepo } = response2
 
   for (const action of actions)
     await action?.(CWD, override)
+  await install(monorepo)
 }
 
 main().catch((e) => {
