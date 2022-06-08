@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.5
+
+### Patch Changes
+
+- 加入 monorepo 选择
+
 ## 2.3.4
 
 ### Patch Changes
