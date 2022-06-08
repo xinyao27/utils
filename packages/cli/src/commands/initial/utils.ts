@@ -38,7 +38,7 @@ export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
         dev: true,
         cwd,
         packageManager: 'pnpm',
-        additionalArgs: ['-W'],
+        additionalArgs: ['-w'],
       })
     }
 
