@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.4
+
+### Patch Changes
+
+- pnpm 安装时额外命令更新
+
 ## 2.3.3
 
 ### Patch Changes
