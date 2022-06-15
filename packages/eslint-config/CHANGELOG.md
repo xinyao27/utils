@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.10
+
+### Patch Changes
+
+- update eslint rules
+
 ## 1.0.9
 
 ### Patch Changes
