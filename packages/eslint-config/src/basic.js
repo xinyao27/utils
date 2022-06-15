@@ -141,7 +141,6 @@ module.exports = {
     'quotes': ['error', 'single'],
     'quote-props': ['error', 'consistent-as-needed'],
     'no-unused-vars': 'warn',
-    'no-param-reassign': 'off',
     'array-bracket-spacing': ['error', 'never'],
     'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
     'block-spacing': ['error', 'always'],
