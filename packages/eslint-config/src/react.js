@@ -15,7 +15,7 @@ module.exports = {
     'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
     'react/jsx-closing-tag-location': ['error'],
     'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never', propElementValues: 'always' }],
-    'react/jsx-curly-newline': ['error', { multiline: 'require', singleline: 'require' }],
+    'react/jsx-curly-newline': ['error', { multiline: 'require', singleline: 'consistent' }],
     'react/jsx-curly-spacing': ['error', { when: 'never', children: true }],
     'react/jsx-equals-spacing': ['error'],
     'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
