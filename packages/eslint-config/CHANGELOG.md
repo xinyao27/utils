@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.11
+
+### Patch Changes
+
+- eslint react 单行属性不换行
+
 ## 1.0.10
 
 ### Patch Changes
