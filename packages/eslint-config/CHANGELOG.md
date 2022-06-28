@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.12
+
+### Patch Changes
+
+- remove curly rule
+
 ## 1.0.11
 
 ### Patch Changes
