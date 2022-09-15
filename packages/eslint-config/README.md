@@ -1,15 +1,15 @@
-# lint
+# eslint-config
 
-[![NPM Version](https://badge.fury.io/js/%40chenyueban%2Flint.svg)](https://www.npmjs.com/package/@chenyueban/lint)
+[![NPM Version](https://badge.fury.io/js/%40chenyueban%2Feslint-config.svg)](https://www.npmjs.com/package/@chenyueban/eslint-config)
 
 ## USAGE
 
-1. Install `@chenyueban/lint`
+1. Install `@chenyueban/eslint-config`
 
 ```sh
-npm install --save-dev @chenyueban/lint
+npm install --save-dev @chenyueban/eslint-config
 # or
-yarn add @chenyueban/lint -D
+yarn add @chenyueban/eslint-config -D
 ```
 
 2. Run
