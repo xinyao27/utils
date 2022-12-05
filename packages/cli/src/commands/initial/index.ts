@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import path from 'path'
-import fs from 'fs/promises'
-import { existsSync } from 'fs'
+import path from 'node:path'
+import fs from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import { execa } from 'execa'
 
 import type { Chain, Choice, Question } from '../../utils'
@@ -24,8 +24,7 @@ import {
 const basePackages = (override?: boolean): BootstrapConfig[] => [
   {
     afterInstall: async(cwd) => {
-      if (!existsSync(path.join(cwd, '.git')))
-        await execa('git', ['init'], { cwd })
+      if (!existsSync(path.join(cwd, '.git'))) { await execa('git', ['init'], { cwd }) }
 
       await setNpmScripts(cwd, { preinstall: 'npx only-allow pnpm' })
       await setNpmScripts(cwd, { 'update:deps': 'pnpm update -i -r --latest' })

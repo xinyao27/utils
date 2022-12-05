@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cwd, exit } from 'process'
+import { cwd, exit } from 'node:process'
 import prompts from 'prompts'
 import { consola } from '@chenyueban/utils'
 
@@ -34,8 +34,7 @@ async function main() {
   )
   const { override, monorepo } = response2
 
-  for (const action of actions)
-    await action?.(CWD, override)
+  for (const action of actions) { await action?.(CWD, override) }
   await install(monorepo)
 }
 

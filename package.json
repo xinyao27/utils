@@ -27,16 +27,16 @@
     "unlink": "cd packages/cli && npm unlink"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.22.0",
+    "@changesets/cli": "^2.25.2",
     "@chenyueban/eslint-config": "workspace:*",
     "@chenyueban/tsconfig": "workspace:*",
-    "@commitlint/cli": "^17.0.2",
-    "commitizen": "^4.2.4",
+    "@commitlint/cli": "^17.3.0",
+    "commitizen": "^4.2.5",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.17.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.0",
+    "eslint": "^8.29.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "rimraf": "^3.0.2",
-    "tsup": "^6.1.0"
+    "tsup": "^6.5.0"
   }
 }
