@@ -1,5 +1,11 @@
 # @chenyueban/cli
 
+## 2.3.6
+
+### Patch Changes
+
+- 更新 vue eslint config
+
 ## 2.3.5
 
 ### Patch Changes

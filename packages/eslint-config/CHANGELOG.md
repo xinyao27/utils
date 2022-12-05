@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.13
+
+### Patch Changes
+
+- 更新 vue eslint config
+
 ## 1.0.12
 
 ### Patch Changes
