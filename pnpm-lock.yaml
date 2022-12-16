@@ -64,6 +64,7 @@ importers:
       eslint-plugin-html: ^6.2.0
       eslint-plugin-import: ^2.25.4
       eslint-plugin-jsonc: ^2.2.1
+      eslint-plugin-jsx: ^0.1.0
       eslint-plugin-markdown: ^2.2.1
       eslint-plugin-n: ^15.0.1
       eslint-plugin-promise: ^6.0.0
@@ -81,6 +82,7 @@ importers:
       eslint-plugin-html: 6.2.0
       eslint-plugin-import: 2.25.4_zzygwppjh5ybjggooatswexhq4
       eslint-plugin-jsonc: 2.2.1
+      eslint-plugin-jsx: 0.1.0
       eslint-plugin-markdown: 2.2.1
       eslint-plugin-n: 15.0.1
       eslint-plugin-promise: 6.0.0
@@ -2021,6 +2023,14 @@ packages:
       natural-compare: 1.4.0
     dev: false
 
+  /eslint-plugin-jsx/0.1.0:
+    resolution: {integrity: sha512-278HIClJgb3Gp1b89wbva7AGS7cxQzBNgKFysy6aEB44Acso2M8ARdoaLUnN7VTWf0vnSvtwugCmc/B8MSzY5g==}
+    dependencies:
+      eslint-plugin-react: 3.4.2
+      html-tags: 1.2.0
+      svg-tags: 1.0.0
+    dev: false
+
   /eslint-plugin-markdown/2.2.1:
     resolution: {integrity: sha512-FgWp4iyYvTFxPwfbxofTvXxgzPsDuSKHQy2S+a8Ve6savbujey+lgrFFbXQA0HPygISpRYWYBjooPzhYSF81iA==}
     engines: {node: ^8.10.0 || ^10.12.0 || >= 12.0.0}
@@ -2053,6 +2063,10 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
+    dev: false
+
+  /eslint-plugin-react/3.4.2:
+    resolution: {integrity: sha512-rIhweRuQMLxNOOHHl9pEkQR+6QiKt9wUHpBvjSefSzUg5qdhC08jc2rxsSm1TAXii9rxabhzK5MUu+YBJxn6sA==}
     dev: false
 
   /eslint-plugin-react/7.29.3:
@@ -2712,6 +2726,11 @@ packages:
     dependencies:
       lru-cache: 6.0.0
     dev: true
+
+  /html-tags/1.2.0:
+    resolution: {integrity: sha512-uVteDXUCs08M7QJx0eY6ue7qQztwIfknap81vAtNob2sdEPKa8PjPinx0vxbs2JONPamovZjMvKZWNW44/PBKg==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /htmlparser2/7.2.0:
     resolution: {integrity: sha512-H7MImA4MS6cw7nbyURtLPO1Tms7C5H602LRETv95z1MxO/7CP7rDVROehUYeYBUYEON94NXXDEPmZuq+hX4sog==}
@@ -4445,6 +4464,10 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  /svg-tags/1.0.0:
+    resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
+    dev: false
 
   /term-size/2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
