@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.0.14
+
+### Patch Changes
+
+- 修复依赖缺失
+
 ## 1.0.13
 
 ### Patch Changes
