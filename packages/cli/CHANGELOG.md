@@ -1,5 +1,13 @@
 # @chenyueban/cli
 
+## 2.3.7
+
+### Patch Changes
+
+- 更新依赖 更新 eslint-config
+- Updated dependencies
+  - @chenyueban/utils@2.0.2
+
 ## 2.3.6
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @chenyueban/utils
 
+## 2.0.2
+
+### Patch Changes
+
+- 更新依赖 更新 eslint-config
+
 ## 2.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.1.0
+
+### Minor Changes
+
+- 更新依赖 更新 eslint-config
+
 ## 1.0.14
 
 ### Patch Changes
