@@ -169,7 +169,7 @@ module.exports = {
     'space-before-function-paren': ['error', 'never'],
     'max-len': [
       'error', {
-        code: 120,
+        code: 150,
         tabWidth: 2,
         ignoreComments: true,
         ignoreTrailingComments: true,

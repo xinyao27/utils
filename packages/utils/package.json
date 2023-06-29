@@ -31,7 +31,7 @@
     "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
   },
   "dependencies": {
-    "consola": "^2.15.3"
+    "consola": "^3.2.2"
   },
   "devDependencies": {
     "@chenyueban/tsconfig": "workspace:*"

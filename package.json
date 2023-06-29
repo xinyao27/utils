@@ -21,22 +21,23 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "publish": "pnpm run build && changeset publish",
-    "update:deps": "pnpm update -i --latest",
+    "up": "taze major -Ir",
     "version": "changeset && changeset version",
     "link": "cd packages/cli && npm link",
     "unlink": "cd packages/cli && npm unlink"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.25.2",
+    "@changesets/cli": "^2.26.2",
     "@chenyueban/eslint-config": "workspace:*",
     "@chenyueban/tsconfig": "workspace:*",
-    "@commitlint/cli": "^17.3.0",
-    "commitizen": "^4.2.5",
+    "@commitlint/cli": "^17.6.6",
+    "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.29.0",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.1.0",
-    "rimraf": "^3.0.2",
-    "tsup": "^6.5.0"
+    "eslint": "^8.43.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "rimraf": "^5.0.1",
+    "taze": "^0.10.3",
+    "tsup": "^7.1.0"
   }
 }
