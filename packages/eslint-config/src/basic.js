@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
     node: true,
   },
+  reportUnusedDisableDirectives: true,
   extends: [
     'standard',
     'plugin:import/recommended',
@@ -14,31 +15,57 @@ module.exports = {
   ],
   ignorePatterns: [
     '*.min.*',
+    '*.d.ts',
     'CHANGELOG.md',
     'dist',
     'LICENSE*',
     'output',
+    'out',
     'coverage',
     'public',
     'temp',
-    'packages-lock.json',
+    'package-lock.json',
     'pnpm-lock.yaml',
     'yarn.lock',
     '__snapshots__',
+    // ignore for in lint-staged
+    '*.css',
+    '*.png',
+    '*.ico',
+    '*.toml',
+    '*.patch',
+    '*.txt',
+    '*.crt',
+    '*.key',
+    'Dockerfile',
+    // force include
     '!.github',
     '!.vitepress',
     '!.vscode',
+    // force exclude
+    '.vitepress/cache',
   ],
-  plugins: ['html', 'unicorn'],
-  settings: { 'import/resolver': { node: { extensions: ['.js', '.mjs', '.ts', '.d.ts'] } } },
+  plugins: [
+    'html',
+    'unicorn',
+    'no-only-tests',
+    'unused-imports',
+  ],
+  settings: { 'import/resolver': { node: { extensions: ['.js', '.mjs'] } } },
   overrides: [
     {
-      files: ['*.json', '*.json5'],
+      files: ['*.json', '*.json5', '*.jsonc'],
       parser: 'jsonc-eslint-parser',
       rules: {
-        'quotes': ['error', 'double'],
-        'quote-props': ['error', 'always'],
-        'comma-dangle': ['error', 'never'],
+        'jsonc/array-bracket-spacing': ['error', 'never'],
+        'jsonc/comma-dangle': ['error', 'never'],
+        'jsonc/comma-style': ['error', 'last'],
+        'jsonc/indent': ['error', 2],
+        'jsonc/key-spacing': ['error', { beforeColon: false, afterColon: true }],
+        'jsonc/no-octal-escape': 'error',
+        'jsonc/object-curly-newline': ['error', { multiline: true, consistent: true }],
+        'jsonc/object-curly-spacing': ['error', 'always'],
+        'jsonc/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
       },
     },
     {
@@ -55,33 +82,47 @@ module.exports = {
           {
             pathPattern: '^$',
             order: [
+              'publisher',
               'name',
+              'displayName',
               'type',
               'version',
               'private',
               'packageManager',
               'description',
-              'keywords',
-              'license',
               'author',
-              'repository',
+              'license',
               'funding',
+              'homepage',
+              'repository',
+              'bugs',
+              'keywords',
+              'categories',
+              'sideEffects',
+              'exports',
               'main',
               'module',
-              'types',
               'unpkg',
               'jsdelivr',
-              'exports',
-              'files',
+              'types',
+              'typesVersions',
               'bin',
-              'sideEffects',
+              'icon',
+              'files',
+              'engines',
+              'activationEvents',
+              'contributes',
               'scripts',
               'peerDependencies',
               'peerDependenciesMeta',
               'dependencies',
               'optionalDependencies',
               'devDependencies',
+              'pnpm',
+              'overrides',
+              'resolutions',
               'husky',
+              'simple-git-hooks',
               'lint-staged',
               'eslintConfig',
             ],
@@ -89,6 +130,15 @@ module.exports = {
           {
             pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies$',
             order: { type: 'asc' },
+          },
+          {
+            pathPattern: '^exports.*$',
+            order: [
+              'types',
+              'import',
+              'require',
+              'default',
+            ],
           },
         ],
       },
@@ -98,8 +148,15 @@ module.exports = {
       rules: { 'import/no-duplicates': 'off' },
     },
     {
-      files: ['*.js'],
-      rules: { '@typescript-eslint/no-var-requires': 'off' },
+      files: ['*.js', '*.cjs', '*.jsx'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
+      },
+    },
+    {
+      files: ['*.ts', '*.tsx', '*.mts', '*.cts'],
+      rules: { 'no-void': ['error', { allowAsStatement: true }] },
     },
     {
       files: ['scripts/**/*.*', 'cli.*'],
@@ -107,7 +164,7 @@ module.exports = {
     },
     {
       files: ['*.test.ts', '*.test.js', '*.spec.ts', '*.spec.js'],
-      rules: { 'no-unused-expressions': 'off' },
+      rules: { 'no-unused-expressions': 'off', 'no-only-tests/no-only-tests': 'error' },
     },
     {
       // Code blocks in markdown file
@@ -117,13 +174,22 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/comma-dangle': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
+        '@typescript-eslint/no-namespace': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
         'import/no-unresolved': 'off',
+        'unused-imports/no-unused-imports': 'off',
+        'unused-imports/no-unused-vars': 'off',
         'no-alert': 'off',
         'no-console': 'off',
         'no-restricted-imports': 'off',
         'no-undef': 'off',
         'no-unused-expressions': 'off',
         'no-unused-vars': 'off',
+        'antfu/no-cjs-exports': 'off',
+        'antfu/no-ts-export-equal': 'off',
+        'n/prefer-global/process': 'off',
       },
     },
   ],
@@ -134,12 +200,22 @@ module.exports = {
     'import/no-mutable-exports': 'error',
     'import/no-unresolved': 'off',
     'import/no-absolute-path': 'off',
+    'import/newline-after-import': ['error', { count: 1, considerComments: true }],
+    'import/no-self-import': 'error',
 
     // Common
     'semi': ['error', 'never'],
+    // 'curly': ['error', 'multi-or-nest', 'consistent'],
     'quotes': ['error', 'single'],
     'quote-props': ['error', 'consistent-as-needed'],
-    'no-unused-vars': 'warn',
+
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+    ],
+
+    // 'no-param-reassign': 'off',
     'array-bracket-spacing': ['error', 'never'],
     'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
     'block-spacing': ['error', 'always'],
@@ -151,13 +227,9 @@ module.exports = {
     'no-debugger': 'error',
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-cond-assign': ['error', 'always'],
-    'func-call-spacing': ['off', 'never'],
+    'func-call-spacing': 'off',
     'key-spacing': ['error', { beforeColon: false, afterColon: true }],
-    'indent': [
-      'error',
-      2,
-      { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 },
-    ],
+    'indent': ['error', 2, { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 }],
     'no-restricted-syntax': [
       'error',
       'DebuggerStatement',
@@ -166,18 +238,26 @@ module.exports = {
     ],
     'object-curly-spacing': ['error', 'always'],
     'no-return-await': 'off',
-    'space-before-function-paren': ['error', 'never'],
-    'max-len': [
-      'error', {
-        code: 150,
-        tabWidth: 2,
-        ignoreComments: true,
-        ignoreTrailingComments: true,
-        ignoreUrls: true,
-        ignoreStrings: true,
-        ignoreTemplateLiterals: true,
-        ignoreRegExpLiterals: true,
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always',
       },
+    ],
+    'no-restricted-globals': [
+      'error',
+      { name: 'global', message: 'Use `globalThis` instead.' },
+      { name: 'self', message: 'Use `globalThis` instead.' },
+    ],
+    'no-restricted-properties': [
+      'error',
+      { property: '__proto__', message: 'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.' },
+      { property: '__defineGetter__', message: 'Use `Object.defineProperty` instead.' },
+      { property: '__defineSetter__', message: 'Use `Object.defineProperty` instead.' },
+      { property: '__lookupGetter__', message: 'Use `Object.getOwnPropertyDescriptor` instead.' },
+      { property: '__lookupSetter__', message: 'Use `Object.getOwnPropertyDescriptor` instead.' },
     ],
     'array-bracket-newline': ['error', { multiline: true }],
     'object-curly-newline': ['error', { multiline: true }],
@@ -189,7 +269,7 @@ module.exports = {
     'prefer-const': [
       'error',
       {
-        destructuring: 'any',
+        destructuring: 'all',
         ignoreReadBeforeAssign: true,
       },
     ],
@@ -208,6 +288,7 @@ module.exports = {
         avoidQuotes: true,
       },
     ],
+    'prefer-exponentiation-operator': 'error',
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
@@ -215,9 +296,7 @@ module.exports = {
     'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
     'generator-star-spacing': 'off',
     'spaced-comment': [
-      'error',
-      'always',
-      {
+      'error', 'always', {
         line: {
           markers: ['/'],
           exceptions: ['/', '#'],
@@ -234,7 +313,7 @@ module.exports = {
     'array-callback-return': 'error',
     'block-scoped-var': 'error',
     'consistent-return': 'off',
-    'complexity': ['off', 11],
+    'complexity': 'off',
     'eqeqeq': ['error', 'smart'],
     'no-alert': 'warn',
     'no-case-declarations': 'error',
@@ -243,10 +322,17 @@ module.exports = {
     'no-with': 'error',
     'no-void': 'error',
     'no-useless-escape': 'off',
+    'no-invalid-this': 'error',
     'vars-on-top': 'error',
     'require-await': 'off',
     'no-return-assign': 'off',
     'operator-linebreak': ['error', 'before'],
+    'max-statements-per-line': ['error', { max: 1 }],
+
+    // node
+    'n/prefer-global/process': ['error', 'never'],
+    'n/prefer-global/buffer': ['error', 'never'],
+    'n/no-callback-literal': 'off',
 
     // unicorns
     // Pass error message when throwing errors
@@ -254,34 +340,35 @@ module.exports = {
     // Uppercase regex escapes
     'unicorn/escape-case': 'error',
     // Array.isArray instead of instanceof
-    'unicorn/no-array-instanceof': 'error',
+    'unicorn/no-instanceof-array': 'error',
     // Prevent deprecated `new Buffer()`
     'unicorn/no-new-buffer': 'error',
     // Keep regex literals safe!
     'unicorn/no-unsafe-regex': 'off',
-    // Lowercase number formatting for octal, hex, binary
-    // (0x1'error' instead of 0X1'error')
+    // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
     'unicorn/number-literal-case': 'error',
-    // ** instead of Math.pow()
-    'unicorn/prefer-exponentiation-operator': 'error',
     // includes over indexOf when checking for existence
     'unicorn/prefer-includes': 'error',
     // String methods startsWith/endsWith instead of more complicated stuff
-    'unicorn/prefer-starts-ends-with': 'error',
+    'unicorn/prefer-string-starts-ends-with': 'error',
     // textContent instead of innerText
     'unicorn/prefer-text-content': 'error',
     // Enforce throwing type error when throwing error while checking typeof
     'unicorn/prefer-type-error': 'error',
     // Use new when throwing error
     'unicorn/throw-new-error': 'error',
+    // Prefer using the node: protocol
+    'unicorn/prefer-node-protocol': 'error',
+    // Prefer using number properties like `Number.isNaN` rather than `isNaN`
+    'unicorn/prefer-number-properties': 'error',
+    // Ban `new Array` as `Array` constructor's params are ambiguous
+    'unicorn/no-new-array': 'error',
 
-    'no-use-before-define': [
-      'error',
-      { functions: false, classes: false, variables: true },
-    ],
+    'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
     'eslint-comments/disable-enable-pair': 'off',
     'import/no-named-as-default-member': 'off',
-    'n/no-callback-literal': 'off',
+    'import/no-named-as-default': 'off',
+    'import/namespace': 'off',
 
     'sort-imports': [
       'error',

@@ -3,25 +3,25 @@
   "type": "module",
   "version": "2.1.0",
   "description": "tsconfig.json inheritance via Node.js packages",
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
   "keywords": [
     "tsconfig",
     "base",
     "inheritance",
     "share"
   ],
-  "homepage": "https://github.com/chenyueban/utils#readme",
-  "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "chenyueban",
-    "email": "jasonchan0527@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
-  },
   "exports": {
     ".": {
       "import": "./tsconfig.json",
@@ -31,12 +31,12 @@
   "files": [
     "tsconfig.json"
   ],
-  "peerDependencies": {
-    "typescript": "^4.4.2"
-  },
   "engines": {
     "node": ">=16",
     "npm": ">=7"
+  },
+  "peerDependencies": {
+    "typescript": "^4.4.2"
   },
   "publishConfig": {
     "access": "public"
