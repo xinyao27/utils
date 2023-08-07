@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.2.3
+
+### Patch Changes
+
+- update eslint-plugin-import to version 2.28.0-2
+
 ## 1.2.2
 
 ### Patch Changes
