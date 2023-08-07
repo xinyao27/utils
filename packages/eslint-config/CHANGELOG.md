@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.2.2
+
+### Patch Changes
+
+- remove eslint-config-standard dependency
+
 ## 1.2.1
 
 ### Patch Changes
