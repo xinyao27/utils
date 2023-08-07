@@ -100,8 +100,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       eslint-plugin-import:
-        specifier: npm:eslint-plugin-i@2.27.5-4
-        version: /eslint-plugin-i@2.27.5-4(@typescript-eslint/parser@6.2.1)(eslint@8.46.0)
+        specifier: npm:eslint-plugin-i@2.28.0-2
+        version: /eslint-plugin-i@2.28.0-2(@typescript-eslint/parser@6.2.1)(eslint@8.46.0)
       eslint-plugin-jest:
         specifier: ^27.2.3
         version: 27.2.3(@typescript-eslint/eslint-plugin@6.2.1)(eslint@8.46.0)(typescript@5.1.6)
@@ -2369,8 +2369,8 @@ packages:
       htmlparser2: 8.0.2
     dev: false
 
-  /eslint-plugin-i@2.27.5-4(@typescript-eslint/parser@6.2.1)(eslint@8.46.0):
-    resolution: {integrity: sha512-X3Z+dp9nZw7d/y41EDO6JyFw4WVMOT91SFuoJvL0C0/4M1l6NxQ5mLTjXHuYhq0AazW75pAmj25yMk5wPMzjsw==}
+  /eslint-plugin-i@2.28.0-2(@typescript-eslint/parser@6.2.1)(eslint@8.46.0):
+    resolution: {integrity: sha512-z48kG4qmE4TmiLcxbmvxMT5ycwvPkXaWW0XpU1L768uZaTbiDbxsHMEdV24JHlOR1xDsPpKW39BfP/pRdYIwFA==}
     engines: {node: '>=12'}
     peerDependencies:
       eslint: ^7.2.0 || ^8
