@@ -1,30 +1,29 @@
 {
   "name": "@chenyueban/cli",
-  "type": "module",
   "version": "2.3.7",
-  "author": {
-    "name": "chenyueban",
-    "email": "jasonchan0527@gmail.com"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/chenyueban/utils#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
-  },
-  "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
-  },
+  "type": "module",
   "keywords": [
     "cli",
     "git"
   ],
+  "license": "MIT",
+  "homepage": "https://github.com/chenyueban/utils#readme",
+  "bugs": {
+    "url": "https://github.com/chenyueban/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenyueban/utils.git"
+  },
+  "author": {
+    "name": "chenyueban",
+    "email": "jasonchan0527@gmail.com"
+  },
   "bin": {
     "c": "./dist/index.js"
   },
-  "engines": {
-    "node": ">=16",
-    "npm": ">=7"
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "prebuild": "rimraf dist",
@@ -46,7 +45,8 @@
     "@chenyueban/tsconfig": "workspace:*",
     "@types/prompts": "^2.4.4"
   },
-  "publishConfig": {
-    "access": "public"
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
   }
 }

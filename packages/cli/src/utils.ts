@@ -1,4 +1,4 @@
-import type { Answers, Choice, PromptObject } from 'prompts'
+import { type Answers, type Choice, type PromptObject } from 'prompts'
 
 export interface Action {
   name?: string
@@ -25,7 +25,7 @@ export function getActionsFromResponse(response: Answers<any>, chain: Chain) {
           if (target && target.actions) {
             target.actions.forEach((action) => {
               if (action.name) {
-                if (action.name === response[target.name as string]) { if (action.fn) actions.push(action.fn) }
+                if (action.name === response[target.name as string] && action.fn) actions.push(action.fn)
               }
               else if (action.fn) {
                 actions.push(action.fn)
@@ -39,7 +39,7 @@ export function getActionsFromResponse(response: Answers<any>, chain: Chain) {
   else if (chain.actions) {
     chain.actions.forEach((action) => {
       if (action.name) {
-        if (action.name === response[chain.name as string]) { if (action.fn) actions.push(action.fn) }
+        if (action.name === response[chain.name as string] && action.fn) actions.push(action.fn)
       }
       else if (action.fn) {
         actions.push(action.fn)

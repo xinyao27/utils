@@ -13,7 +13,11 @@ export async function setNpmScripts(
   if (pkgFile) {
     const pkgJson = await readFile(pkgFile, { encoding: 'utf8' })
     const pkg = JSON.parse(pkgJson)
-    if (pkg.scripts) for (const key in scripts) pkg.scripts[key] = scripts[key]
+    if (pkg.scripts) {
+      for (const key in scripts) {
+        pkg.scripts[key] = scripts[key]
+      }
+    }
     else pkg.scripts = scripts
 
     await writeFile(pkgFile, JSON.stringify(pkg, null, 2))
@@ -31,7 +35,7 @@ export interface BootstrapConfig {
   }
 }
 export const bootstrapTasks: { cwd: string; config: BootstrapConfig }[] = []
-export async function bootstrap(cwd: string, configs: BootstrapConfig[]) {
+export function bootstrap(cwd: string, configs: BootstrapConfig[]) {
   configs.forEach((config) => {
     bootstrapTasks.push({ cwd, config })
   })

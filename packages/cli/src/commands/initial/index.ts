@@ -5,9 +5,8 @@ import fs from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { execa } from 'execa'
 
-import type { Chain, Choice, Question } from '../../utils'
-import type { BootstrapConfig } from './utils'
-import { bootstrap, setNpmScripts } from './utils'
+import { type Chain, type Choice, type Question } from '../../utils'
+import { type BootstrapConfig, bootstrap, setNpmScripts } from './utils'
 import {
   COMMITLINTRC,
   CZRC,
@@ -23,8 +22,10 @@ import {
 
 const basePackages = (override?: boolean): BootstrapConfig[] => [
   {
-    afterInstall: async(cwd) => {
-      if (!existsSync(path.join(cwd, '.git'))) { await execa('git', ['init'], { cwd }) }
+    afterInstall: async (cwd) => {
+      if (!existsSync(path.join(cwd, '.git'))) {
+        await execa('git', ['init'], { cwd })
+      }
 
       await setNpmScripts(cwd, { preinstall: 'npx only-allow pnpm' })
       await setNpmScripts(cwd, { 'update:deps': 'pnpm update -i -r --latest' })
@@ -100,7 +101,7 @@ const eslintPackages = (override?: boolean): BootstrapConfig[] => [
     },
   },
   {
-    afterInstall: async(cwd) => {
+    afterInstall: async (cwd) => {
       await setNpmScripts(cwd, { lint: 'eslint . --fix' })
     },
   },
@@ -108,7 +109,7 @@ const eslintPackages = (override?: boolean): BootstrapConfig[] => [
 const toolsPackages = (override?: boolean): BootstrapConfig[] => [
   {
     packageName: 'husky',
-    afterInstall: async(cwd) => {
+    afterInstall: async (cwd) => {
       await setNpmScripts(cwd, { prepare: 'husky install' })
       await execa('npm', ['run', 'prepare'], { cwd })
       if (existsSync(path.join(cwd, '.husky/pre-commit'))) {
@@ -159,7 +160,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd, override) => {
+        fn: async (cwd, override) => {
           await bootstrap(cwd, basePackages(override))
         },
       },
@@ -174,7 +175,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd, override) => {
+        fn: async (cwd, override) => {
           await bootstrap(cwd, typescriptPackages(override))
         },
       },
@@ -189,7 +190,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd, override) => {
+        fn: async (cwd, override) => {
           await bootstrap(cwd, commitPackages(override))
         },
       },
@@ -204,7 +205,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd, override) => {
+        fn: async (cwd, override) => {
           await bootstrap(cwd, eslintPackages(override))
         },
       },
@@ -219,7 +220,7 @@ export const chain: Chain = [
     inactive: 'no',
     actions: [
       {
-        fn: async(cwd, override) => {
+        fn: async (cwd, override) => {
           await bootstrap(cwd, toolsPackages(override))
         },
       },
@@ -254,11 +255,11 @@ export const chain: Chain = [
     actions: [
       {
         name: 'release-it',
-        fn: async(cwd, override) => {
+        fn: async (cwd, override) => {
           await bootstrap(cwd, [
             {
               packageName: 'release-it',
-              afterInstall: async(c) => {
+              afterInstall: async (c) => {
                 await setNpmScripts(c, { release: 'release-it' })
               },
               configFile: {
@@ -273,11 +274,11 @@ export const chain: Chain = [
       },
       {
         name: 'changesets',
-        fn: async(cwd) => {
+        fn: async (cwd) => {
           await bootstrap(cwd, [
             {
               packageName: '@changesets/cli',
-              afterInstall: async(c) => {
+              afterInstall: async (c) => {
                 await execa('npx', ['changeset', 'init'], { cwd: c })
               },
             },

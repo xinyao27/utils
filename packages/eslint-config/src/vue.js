@@ -1,94 +1,130 @@
-module.exports = {
-  overrides: [
-    {
-      files: ['*.vue'],
-      parser: 'vue-eslint-parser',
-      parserOptions: { parser: '@typescript-eslint/parser' },
-      rules: {
-        'no-unused-vars': 'off',
-        'no-undef': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
+import { getPackageInfoSync } from 'local-pkg'
+import vueParser from 'vue-eslint-parser'
+import vuePlugin from 'eslint-plugin-vue'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
+import { typescript } from './typescript.js'
+import { GLOB_VUE } from './shared.js'
+
+export { vueParser, vuePlugin }
+
+export function getVueVersion() {
+  const pkg = getPackageInfoSync('vue', { paths: [process.cwd()] })
+  if (
+    pkg
+    && typeof pkg.version === 'string'
+    && !Number.isNaN(+pkg.version[0])
+  ) {
+    return +pkg.version[0]
+  }
+  return 3
+}
+const isVue3 = getVueVersion() === 3
+
+/** @type {import('eslint-define-config').FlatESLintConfigItem[]} */
+export const reactivityTransform = [
+  {
+    languageOptions: {
+      globals: {
+        $: 'readonly',
+        $$: 'readonly',
+        $ref: 'readonly',
+        $computed: 'readonly',
+        $shallowRef: 'readonly',
+        $toRef: 'readonly',
+        $customRef: 'readonly',
       },
     },
-  ],
-  extends: [
-    'plugin:vue/vue3-recommended',
-    './typescript.js',
-  ],
-  rules: {
-    'vue/max-attributes-per-line': 'off',
-    'vue/no-v-html': 'off',
-    'vue/require-prop-types': 'off',
-    'vue/require-default-prop': 'off',
-    'vue/multi-word-component-names': 'off',
-    'vue/prefer-import-from-vue': 'off',
-    'vue/no-v-text-v-html-on-component': 'off',
-    'vue/no-dupe-keys': 'off',
-
-    // reactivity transform
-    'vue/no-setup-props-destructure': 'off',
-
-    'vue/component-tags-order': ['error', { order: ['script', 'template', 'style'] }],
-    'vue/block-tag-newline': [
-      'error', {
-        singleline: 'always',
-        multiline: 'always',
-      },
-    ],
-    'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-    'vue/component-options-name-casing': ['error', 'PascalCase'],
-    'vue/custom-event-name-casing': ['error', 'camelCase'],
-    'vue/define-macros-order': ['error', { order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'] }],
-    'vue/html-comment-content-spacing': ['error', 'always', { exceptions: ['-'] }],
-    'vue/no-restricted-v-bind': ['error', '/^v-/'],
-    'vue/no-useless-v-bind': 'error',
-    'vue/no-unused-refs': 'error',
-    'vue/padding-line-between-blocks': ['error', 'always'],
-    'vue/prefer-separate-static-class': 'error',
-
-    // extensions
-    'vue/array-bracket-spacing': ['error', 'never'],
-    'vue/arrow-spacing': ['error', { before: true, after: true }],
-    'vue/block-spacing': ['error', 'always'],
-    'vue/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
-    'vue/comma-dangle': ['error', 'always-multiline'],
-    'vue/comma-spacing': ['error', { before: false, after: true }],
-    'vue/comma-style': ['error', 'last'],
-    'vue/dot-location': ['error', 'property'],
-    'vue/dot-notation': ['error', { allowKeywords: true }],
-    'vue/eqeqeq': ['error', 'smart'],
-    // 'vue/func-call-spacing': ['off', 'never'],
-    'vue/key-spacing': ['error', { beforeColon: false, afterColon: true }],
-    'vue/keyword-spacing': ['error', { before: true, after: true }],
-    'vue/no-constant-condition': 'warn',
-    'vue/no-empty-pattern': 'error',
-    'vue/no-extra-parens': ['error', 'functions'],
-    'vue/no-irregular-whitespace': 'error',
-    'vue/no-loss-of-precision': 'error',
-    'vue/no-restricted-syntax': [
-      'error',
-      'DebuggerStatement',
-      'LabeledStatement',
-      'WithStatement',
-    ],
-    'vue/no-sparse-arrays': 'error',
-    'vue/object-curly-newline': ['error', { multiline: true, consistent: true }],
-    'vue/object-curly-spacing': ['error', 'always'],
-    'vue/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
-    'vue/object-shorthand': [
-      'error',
-      'always',
-      {
-        ignoreConstructors: false,
-        avoidQuotes: true,
-      },
-    ],
-    'vue/operator-linebreak': ['error', 'before'],
-    'vue/prefer-template': 'error',
-    'vue/quote-props': ['error', 'consistent-as-needed'],
-    'vue/space-in-parens': ['error', 'never'],
-    'vue/space-infix-ops': 'error',
-    'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
-    'vue/template-curly-spacing': 'error',
+    plugins: { vue: vuePlugin },
+    rules: { 'vue/no-setup-props-destructure': 'off' },
   },
+]
+
+/** @type {import('eslint-define-config').Rules} */
+const vueCustomRules = {
+  'vue/max-attributes-per-line': 'off',
+  'vue/no-v-html': 'off',
+  'vue/multi-word-component-names': 'off',
+  'vue/require-prop-types': 'off',
+  'vue/require-default-prop': 'off',
+
+  'vue/html-self-closing': [
+    'error',
+    {
+      html: {
+        void: 'always',
+        normal: 'always',
+        component: 'always',
+      },
+      svg: 'always',
+      math: 'always',
+    },
+  ],
+  'vue/component-tags-order': [
+    'error',
+    { order: ['script', 'template', 'style'] },
+  ],
+  'vue/custom-event-name-casing': ['error', 'camelCase'],
+  'vue/no-useless-v-bind': 'error',
+  'vue/no-unused-refs': 'error',
+  'vue/padding-line-between-blocks': ['error', 'always'],
+
+  'vue/prefer-template': 'error',
+  'vue/eqeqeq': ['error', 'smart'],
+  'vue/no-constant-condition': 'warn',
+  'vue/object-shorthand': [
+    'error',
+    'always',
+    {
+      ignoreConstructors: false,
+      avoidQuotes: true,
+    },
+  ],
+  'vue/no-loss-of-precision': 'error',
+  'vue/no-empty-pattern': 'error',
 }
+
+/** @type {import('eslint-define-config').Rules} */
+const vue3Rules = {
+  ...vuePlugin.configs.base.rules,
+  ...vuePlugin.configs['vue3-essential'].rules,
+  ...vuePlugin.configs['vue3-strongly-recommended'].rules,
+  ...vuePlugin.configs['vue3-recommended'].rules,
+}
+
+/** @type {import('eslint-define-config').Rules} */
+const vue2Rules = {
+  ...vuePlugin.configs.base.rules,
+  ...vuePlugin.configs.essential.rules,
+  ...vuePlugin.configs['strongly-recommended'].rules,
+  ...vuePlugin.configs.recommended.rules,
+}
+
+/** @type {import('eslint-define-config').FlatESLintConfigItem[]} */
+export const vue = [
+  {
+    files: [GLOB_VUE],
+    plugins: {
+      'vue': vuePlugin,
+      '@typescript-eslint': tsPlugin,
+    },
+    languageOptions: {
+      parser: vueParser,
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        sourceType: 'module',
+        extraFileExtensions: ['.vue'],
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    processor: vuePlugin.processors['.vue'],
+    rules: { ...typescript[0].rules },
+  },
+  {
+    plugins: { vue: vuePlugin },
+    rules: {
+      ...(isVue3 ? vue3Rules : vue2Rules),
+      ...vueCustomRules,
+    },
+  },
+  ...reactivityTransform,
+]

@@ -34,11 +34,16 @@ async function main() {
   )
   const { override, monorepo } = response2
 
-  for (const action of actions) { await action?.(CWD, override) }
+  for (const action of actions) {
+    await action?.(CWD, override)
+  }
   await install(monorepo)
 }
 
-main().catch((e) => {
-  consola.error(e)
+try {
+  await main()
+}
+catch(error) {
+  consola.error(error)
   exit()
-})
+}
