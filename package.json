@@ -24,7 +24,7 @@
     "up": "taze major -Ir",
     "link": "cd packages/cli && npm link",
     "unlink": "cd packages/cli && npm unlink",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp -r && pnpm -r publish",
     "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
