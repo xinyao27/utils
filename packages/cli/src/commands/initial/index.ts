@@ -11,7 +11,7 @@ import {
   COMMITLINTRC,
   CZRC,
   EDITOR_CONFIG,
-  ESLINTRC,
+  ESLINT_CONFIG,
   GITIGNORE,
   LINTSTAGEDRC,
   NPMRC,
@@ -95,8 +95,8 @@ const eslintPackages = (override?: boolean): BootstrapConfig[] => [
   { packageName: 'eslint' },
   {
     configFile: {
-      configFileName: '.eslintrc',
-      configFileRaw: ESLINTRC,
+      configFileName: 'eslint.config.js',
+      configFileRaw: ESLINT_CONFIG,
       override,
     },
   },

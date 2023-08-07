@@ -37,9 +37,9 @@ export const TSCONFIG_NODE_JSON_CONTENT = `{
 }
 `
 
-export const ESLINTRC = `{
-  "extends": "@chenyueban"
-}
+export const ESLINT_CONFIG = `import { all } from '@chenyueban/eslint-config'
+
+export default all
 `
 
 export const LINTSTAGEDRC = `{
