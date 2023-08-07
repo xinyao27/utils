@@ -1,5 +1,11 @@
 # @chenyueban/lint
 
+## 1.2.1
+
+### Patch Changes
+
+- update eslint-plugin-import and add eslint-plugin-jest
+
 ## 1.2.0
 
 ### Minor Changes
