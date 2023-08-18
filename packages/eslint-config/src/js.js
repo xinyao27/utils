@@ -201,7 +201,7 @@ export const imports = [
           pathGroupsExcludedImportTypes: ['type'],
         },
       ],
-      'import/no-default-export': 'error',
+      'import/no-default-export': 'off',
 
       'antfu/import-dedupe': 'error',
       'antfu/prefer-inline-type-import': 'error',
