@@ -4,6 +4,7 @@ import importPlugin from 'eslint-plugin-import'
 import unicornPlugin from 'eslint-plugin-unicorn'
 import antfuPlugin from 'eslint-plugin-antfu'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from './shared.js'
+import standardRules from './standard-rules.js'
 
 export { importPlugin, unicornPlugin, antfuPlugin }
 
@@ -21,12 +22,12 @@ export const js = [
     },
     plugins: { antfu: antfuPlugin },
     rules: {
+      ...standardRules,
       // Common
       'semi': ['error', 'never'],
       // 'curly': ['error', 'multi-or-nest', 'consistent'],
       'quotes': ['error', 'single'],
       'quote-props': ['error', 'consistent-as-needed'],
-
       // 'no-param-reassign': 'off',
       'array-bracket-spacing': ['error', 'never'],
       'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
@@ -140,18 +141,8 @@ export const js = [
       'no-return-assign': 'off',
       'operator-linebreak': ['error', 'before'],
       'max-statements-per-line': ['error', { max: 1 }],
-
       'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
-      'sort-imports': [
-        'error',
-        {
-          ignoreCase: false,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-          allowSeparatedGroups: false,
-        },
-      ],
+      'eslint-comments/disable-enable-pair': 'off',
     },
   },
   {
@@ -202,6 +193,21 @@ export const imports = [
         },
       ],
       'import/no-default-export': 'off',
+      'import/newline-after-import': ['error', { count: 1, considerComments: true }],
+      'import/no-self-import': 'error',
+      'import/no-named-as-default-member': 'off',
+      'import/no-named-as-default': 'off',
+      'import/namespace': 'off',
+      'sort-imports': [
+        'error',
+        {
+          ignoreCase: false,
+          ignoreDeclarationSort: true,
+          ignoreMemberSort: false,
+          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+          allowSeparatedGroups: false,
+        },
+      ],
 
       'antfu/import-dedupe': 'error',
       'antfu/prefer-inline-type-import': 'error',
