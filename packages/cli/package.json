@@ -35,7 +35,7 @@
     "@chenyueban/utils": "workspace:*",
     "clipboardy": "^3.0.0",
     "dayjs": "^1.11.9",
-    "execa": "^7.2.0",
+    "execa": "^8.0.1",
     "gitlog": "^4.0.8",
     "kolorist": "^1.8.0",
     "pkg-up": "^4.0.0",
