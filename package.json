@@ -25,7 +25,7 @@
     "up": "taze major -Ir",
     "link": "cd packages/cli && npm link",
     "unlink": "cd packages/cli && npm unlink",
-    "release": "pnpm run build && bumpp -r && pnpm -r publish"
+    "release": "bumpp -r && pnpm run build && pnpm -r publish"
   },
   "devDependencies": {
     "@chenyueban/eslint-config": "workspace:*",
