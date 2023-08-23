@@ -1,6 +1,7 @@
 import globals from 'globals'
 import jsConfig from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
+import unusedImportsPlugin from 'eslint-plugin-unused-imports'
 import unicornPlugin from 'eslint-plugin-unicorn'
 import antfuPlugin from 'eslint-plugin-antfu'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from './shared.js'
@@ -168,6 +169,7 @@ export const imports = [
   {
     plugins: {
       import: importPlugin,
+      unusedImports: unusedImportsPlugin,
       antfu: antfuPlugin,
     },
     settings: { 'import/resolver': { node: { extensions: ['.js', '.mjs', '.ts', '.mts', '.d.ts'] } } },
@@ -207,6 +209,12 @@ export const imports = [
           memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
           allowSeparatedGroups: false,
         },
+      ],
+
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
       ],
 
       'antfu/import-dedupe': 'error',
