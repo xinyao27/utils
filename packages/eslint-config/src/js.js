@@ -7,6 +7,8 @@ import antfuPlugin from 'eslint-plugin-antfu'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from './shared.js'
 import standardRules from './standard-rules.js'
 
+const isInEditor = (process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI
+
 export { importPlugin, unicornPlugin, antfuPlugin }
 
 /** @type {import('eslint-define-config').FlatESLintConfigItem[]} */
@@ -21,7 +23,10 @@ export const js = [
       },
       sourceType: 'module',
     },
-    plugins: { antfu: antfuPlugin },
+    plugins: {
+      'antfu': antfuPlugin,
+      'unused-imports': unusedImportsPlugin,
+    },
     rules: {
       ...standardRules,
       // Common
@@ -144,6 +149,19 @@ export const js = [
       'max-statements-per-line': ['error', { max: 1 }],
       'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
       'eslint-comments/disable-enable-pair': 'off',
+
+      'no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
+      [isInEditor ? 'no-unused-vars' : 'unused-imports/no-unused-vars']:
+        isInEditor
+          ? [
+            'warn',
+            { args: 'after-used', ignoreRestSiblings: true },
+          ]
+          : [
+            'warn',
+            { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+          ],
     },
   },
   {
@@ -169,7 +187,6 @@ export const imports = [
   {
     plugins: {
       import: importPlugin,
-      unusedImports: unusedImportsPlugin,
       antfu: antfuPlugin,
     },
     settings: { 'import/resolver': { node: { extensions: ['.js', '.mjs', '.ts', '.mts', '.d.ts'] } } },
@@ -209,12 +226,6 @@ export const imports = [
           memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
           allowSeparatedGroups: false,
         },
-      ],
-
-      'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': [
-        'warn',
-        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
       ],
 
       'antfu/import-dedupe': 'error',

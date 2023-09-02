@@ -43,7 +43,7 @@ async function main() {
 try {
   await main()
 }
-catch(error) {
+catch (error) {
   consola.error(error)
   exit()
 }

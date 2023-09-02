@@ -2,6 +2,7 @@ import { toString } from './base'
 
 export const isBoolean = (val: any): val is boolean => typeof val === 'boolean'
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const isFunction = <T extends Function>(val: any): val is T =>
   typeof val === 'function'
 

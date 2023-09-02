@@ -1,6 +1,7 @@
 {
   "name": "@chenyueban/eslint-config",
   "version": "3.0.5",
+  "type": "module",
   "keywords": [
     "eslint",
     "eslintConfig"
