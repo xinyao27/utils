@@ -20,15 +20,15 @@
     "email": "jasonchan0527@gmail.com"
   },
   "files": [
+    "index.cjs",
     "index.js",
-    "index.mjs",
     "src"
   ],
-  "main": "./index.js",
-  "module": "./index.mjs",
+  "main": "./index.cjs",
+  "module": "./index.js",
   "exports": {
-    "require": "./index.js",
-    "import": "./index.mjs"
+    "require": "./index.cjs",
+    "import": "./index.js"
   },
   "publishConfig": {
     "access": "public"
@@ -40,11 +40,11 @@
     "eslint": "^8.0.0"
   },
   "dependencies": {
-    "@eslint/js": "^8.47.0",
-    "@typescript-eslint/eslint-plugin": "^6.4.1",
-    "@typescript-eslint/parser": "^6.4.1",
+    "@eslint/js": "^8.48.0",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
     "eslint-define-config": "^1.23.0",
-    "eslint-plugin-antfu": "^0.40.2",
+    "eslint-plugin-antfu": "^0.41.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jsonc": "^2.9.0",
