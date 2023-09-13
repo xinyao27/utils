@@ -42,6 +42,12 @@ export const ESLINT_CONFIG = `import { all } from '@chenyueban/eslint-config'
 export default all
 `
 
+export const VSCODE_SETTING = `{
+  "eslint.experimental.useFlatConfig": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
+`
+
 export const LINTSTAGEDRC = `{
   "*.{js?(x),ts?(x),vue,html,md,json,yml}": [
     "eslint --fix",

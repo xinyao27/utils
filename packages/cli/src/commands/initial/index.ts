@@ -18,6 +18,7 @@ import {
   RELEASE_IT,
   TSCONFIG_JSON_CONTENT,
   TSCONFIG_NODE_JSON_CONTENT,
+  VSCODE_SETTING,
 } from './raw'
 
 const basePackages = (override?: boolean): BootstrapConfig[] => [
@@ -97,6 +98,13 @@ const eslintPackages = (override?: boolean): BootstrapConfig[] => [
     configFile: {
       configFileName: 'eslint.config.js',
       configFileRaw: ESLINT_CONFIG,
+      override,
+    },
+  },
+  {
+    configFile: {
+      configFileName: '.vscode/settings.json',
+      configFileRaw: VSCODE_SETTING,
       override,
     },
   },
