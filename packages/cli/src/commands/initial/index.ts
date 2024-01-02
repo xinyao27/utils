@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import path from 'node:path'
-import { existsSync, readFile } from 'fs-extra'
+import { exists, readFile } from 'fs-extra'
 import { execa } from 'execa'
 
 import { type Chain, type Choice, type Question } from '../../utils'
@@ -23,7 +23,7 @@ import {
 const basePackages = (override?: boolean): BootstrapConfig[] => [
   {
     afterInstall: async (cwd) => {
-      if (!existsSync(path.join(cwd, '.git'))) {
+      if (!(await exists(path.join(cwd, '.git')))) {
         await execa('git', ['init'], { cwd })
       }
 
@@ -119,7 +119,7 @@ const toolsPackages = (override?: boolean): BootstrapConfig[] => [
     afterInstall: async (cwd) => {
       await setNpmScripts(cwd, { prepare: 'husky install' })
       await execa('npm', ['run', 'prepare'], { cwd })
-      if (existsSync(path.join(cwd, '.husky/pre-commit'))) {
+      if (await exists(path.join(cwd, '.husky/pre-commit'))) {
         const preCommit = await readFile(
           path.join(cwd, '.husky/pre-commit'),
           { encoding: 'utf-8' },

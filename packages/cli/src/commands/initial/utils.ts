@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { existsSync, readFile, writeFile } from 'fs-extra'
+import { exists, readFile, writeFile } from 'fs-extra'
 import { pkgUp } from 'pkg-up'
 import { installPackage } from '@antfu/install-pkg'
 import { consola } from '@chenyueban/utils'
@@ -58,7 +58,7 @@ export async function install(monorepo: boolean) {
     if (configFile) {
       const { configFileName, configFileRaw, override } = configFile
       const configFilePath = join(cwd, configFileName)
-      if (override || !existsSync(configFilePath)) {
+      if (override || !(await exists(configFilePath))) {
         await writeFile(configFilePath, configFileRaw)
         consola.info(`auto generated ${configFileName}`)
       }
