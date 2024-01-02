@@ -1,6 +1,5 @@
-import { readFile, writeFile } from 'node:fs/promises'
-import { existsSync } from 'node:fs'
 import { join } from 'node:path'
+import { existsSync, readFile, writeFile } from 'fs-extra'
 import { pkgUp } from 'pkg-up'
 import { installPackage } from '@antfu/install-pkg'
 import { consola } from '@chenyueban/utils'

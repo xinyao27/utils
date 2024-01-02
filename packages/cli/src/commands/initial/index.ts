@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import path from 'node:path'
-import fs from 'node:fs/promises'
-import { existsSync } from 'node:fs'
+import { existsSync, readFile } from 'fs-extra'
 import { execa } from 'execa'
 
 import { type Chain, type Choice, type Question } from '../../utils'
@@ -121,7 +120,7 @@ const toolsPackages = (override?: boolean): BootstrapConfig[] => [
       await setNpmScripts(cwd, { prepare: 'husky install' })
       await execa('npm', ['run', 'prepare'], { cwd })
       if (existsSync(path.join(cwd, '.husky/pre-commit'))) {
-        const preCommit = await fs.readFile(
+        const preCommit = await readFile(
           path.join(cwd, '.husky/pre-commit'),
           { encoding: 'utf-8' },
         )
