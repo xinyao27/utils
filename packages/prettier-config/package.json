@@ -1,0 +1,24 @@
+{
+  "name": "@chenyueban/prettier-config",
+  "version": "0.0.0",
+  "description": "Prettier config for @xinyao27",
+  "license": "MIT",
+  "homepage": "https://github.com/xinyao/utils#readme",
+  "bugs": {
+    "url": "https://github.com/xinyao/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xinyao/utils.git"
+  },
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  },
+  "prettier": "./index.js"
+}

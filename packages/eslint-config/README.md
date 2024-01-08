@@ -4,16 +4,10 @@
 
 ## USAGE
 
-1. Install `@chenyueban/eslint-config`
+Install `@chenyueban/eslint-config`
 
 ```sh
 npm install --save-dev @chenyueban/eslint-config
 # or
 yarn add @chenyueban/eslint-config -D
-```
-
-2. Run
-
-```sh
-npx cl
 ```

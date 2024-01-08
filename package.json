@@ -4,17 +4,17 @@
   "private": true,
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/chenyueban/utils#readme",
+  "homepage": "https://github.com/xinyao27/utils#readme",
   "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
+    "url": "https://github.com/xinyao27/utils/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
+    "url": "git+https://github.com/xinyao27/utils.git"
   },
   "author": {
-    "name": "chenyueban",
-    "email": "jasonchan0527@gmail.com"
+    "name": "xinyao27",
+    "email": "hi@xinyao.me"
   },
   "scripts": {
     "build": "pnpm -r run build",
@@ -30,15 +30,15 @@
   "devDependencies": {
     "@chenyueban/eslint-config": "workspace:*",
     "@chenyueban/tsconfig": "workspace:*",
-    "@commitlint/cli": "^17.7.1",
-    "bumpp": "^9.2.0",
+    "@commitlint/cli": "^18.4.4",
+    "bumpp": "^9.2.1",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.48.0",
+    "eslint": "^8.56.0",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "rimraf": "^5.0.1",
-    "taze": "^0.11.2",
-    "tsup": "^7.2.0"
+    "lint-staged": "^15.2.0",
+    "rimraf": "^5.0.5",
+    "taze": "^0.13.1",
+    "tsup": "^8.0.1"
   }
 }

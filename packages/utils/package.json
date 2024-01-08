@@ -6,17 +6,17 @@
     "utils"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/chenyueban/utils#readme",
+  "homepage": "https://github.com/xinyao27/utils#readme",
   "bugs": {
-    "url": "https://github.com/chenyueban/utils/issues"
+    "url": "https://github.com/xinyao27/utils/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chenyueban/utils.git"
+    "url": "git+https://github.com/xinyao27/utils.git"
   },
   "author": {
-    "name": "chenyueban",
-    "email": "jasonchan0527@gmail.com"
+    "name": "xinyao27",
+    "email": "hi@xinyao.me"
   },
   "types": "./dist/index.d.ts",
   "exports": {
