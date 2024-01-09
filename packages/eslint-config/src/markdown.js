@@ -11,7 +11,9 @@ export const markdown = [
   },
   {
     files: [`${GLOB_MARKDOWN}/${GLOB_SRC}`, `${GLOB_MARKDOWN}/${GLOB_VUE}`],
-    languageOptions: { parserOptions: { ecmaFeatures: { impliedStrict: true } } },
+    languageOptions: {
+      parserOptions: { ecmaFeatures: { impliedStrict: true } },
+    },
     plugins: { '@typescript-eslint': tsPlugin },
     rules: {
       ...markdownPlugin.configs.recommended.overrides[1].rules,

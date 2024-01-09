@@ -1,8 +1,8 @@
-import pluginPrettier from "eslint-plugin-prettier";
-import configPrettier from "eslint-config-prettier";
+import pluginPrettier from 'eslint-plugin-prettier'
+import configPrettier from 'eslint-config-prettier'
 
-const prettierConflictRules = { ...configPrettier.rules };
-delete prettierConflictRules["vue/html-self-closing"];
+const prettierConflictRules = { ...configPrettier.rules }
+delete prettierConflictRules['vue/html-self-closing']
 
 /** @type {import('eslint-define-config').FlatESLintConfigItem[]} */
 export const prettier = [
@@ -11,7 +11,7 @@ export const prettier = [
     rules: {
       ...prettierConflictRules,
       ...pluginPrettier.configs.recommended.rules,
-      "prettier/prettier": "warn",
+      'prettier/prettier': 'warn',
     },
   },
-];
+]

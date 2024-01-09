@@ -47,7 +47,7 @@ export const chain: Chain = {
     {
       name: 'subject',
       fn: async () => {
-        const str = (await git()).map(commit => commit.subject).join('\n')
+        const str = (await git()).map((commit) => commit.subject).join('\n')
         clipboard.write(str)
         consola.info('已经帮你复制好啦~ \n', str)
       },

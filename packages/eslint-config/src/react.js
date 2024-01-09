@@ -1,6 +1,7 @@
 import reactPlugin from 'eslint-plugin-react'
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import nextPlugin from '@next/eslint-plugin-next'
 import globals from 'globals'
 
 /** @type {import('eslint-define-config').FlatESLintConfigItem[]} */
@@ -10,6 +11,7 @@ export const react = [
     plugins: {
       react: reactPlugin,
       reactHooks: reactHooksPlugin,
+      next: nextPlugin,
     },
     ...reactRecommended,
     languageOptions: {
@@ -27,20 +29,40 @@ export const react = [
       // jsx
       'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
       'react/jsx-closing-tag-location': ['error'],
-      'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never', propElementValues: 'always' }],
-      'react/jsx-curly-newline': ['error', { multiline: 'consistent', singleline: 'consistent' }],
+      'react/jsx-curly-brace-presence': [
+        'error',
+        { props: 'never', children: 'never', propElementValues: 'always' },
+      ],
+      'react/jsx-curly-newline': [
+        'error',
+        { multiline: 'consistent', singleline: 'consistent' },
+      ],
       'react/jsx-curly-spacing': ['error', { when: 'never', children: true }],
       'react/jsx-equals-spacing': ['error'],
       'react/jsx-first-prop-new-line': ['error', 'multiline-multiprop'],
-      'react/jsx-indent': ['error', 2, { checkAttributes: true, indentLogicalExpressions: false }],
+      'react/jsx-indent': [
+        'error',
+        2,
+        { checkAttributes: true, indentLogicalExpressions: false },
+      ],
       'react/jsx-indent-props': ['error', 2],
       'react/jsx-max-props-per-line': ['error'],
       'react/jsx-props-no-multi-spaces': ['error'],
       'react/jsx-props-no-spreading': 'off',
-      'react/jsx-sort-props': ['error', { ignoreCase: false, callbacksLast: true, shorthandFirst: true, multiline: 'last', reservedFirst: true }],
+      'react/jsx-sort-props': [
+        'error',
+        {
+          ignoreCase: false,
+          callbacksLast: true,
+          shorthandFirst: true,
+          multiline: 'last',
+          reservedFirst: true,
+        },
+      ],
       'react/self-closing-comp': ['error', { component: true, html: true }],
       'react/jsx-wrap-multilines': [
-        'error', {
+        'error',
+        {
           declaration: 'parens-new-line',
           assignment: 'parens-new-line',
           return: 'parens-new-line',

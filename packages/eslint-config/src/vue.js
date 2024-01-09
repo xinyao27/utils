@@ -10,9 +10,9 @@ export { vueParser, vuePlugin }
 export function getVueVersion() {
   const pkg = getPackageInfoSync('vue', { paths: [process.cwd()] })
   if (
-    pkg
-    && typeof pkg.version === 'string'
-    && !Number.isNaN(+pkg.version[0])
+    pkg &&
+    typeof pkg.version === 'string' &&
+    !Number.isNaN(+pkg.version[0])
   ) {
     return +pkg.version[0]
   }
@@ -104,7 +104,7 @@ export const vue = [
   {
     files: [GLOB_VUE],
     plugins: {
-      'vue': vuePlugin,
+      vue: vuePlugin,
       '@typescript-eslint': tsPlugin,
     },
     languageOptions: {

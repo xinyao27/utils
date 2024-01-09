@@ -16,8 +16,7 @@ export async function setNpmScripts(
       for (const key in scripts) {
         pkg.scripts[key] = scripts[key]
       }
-    }
-    else pkg.scripts = scripts
+    } else pkg.scripts = scripts
 
     await writeFile(pkgFile, JSON.stringify(pkg, null, 2))
   }

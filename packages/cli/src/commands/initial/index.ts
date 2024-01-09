@@ -120,10 +120,9 @@ const toolsPackages = (override?: boolean): BootstrapConfig[] => [
       await setNpmScripts(cwd, { prepare: 'husky install' })
       await execa('npm', ['run', 'prepare'], { cwd })
       if (await exists(path.join(cwd, '.husky/pre-commit'))) {
-        const preCommit = await readFile(
-          path.join(cwd, '.husky/pre-commit'),
-          { encoding: 'utf-8' },
-        )
+        const preCommit = await readFile(path.join(cwd, '.husky/pre-commit'), {
+          encoding: 'utf-8',
+        })
         if (!preCommit.includes('npx lint-staged')) {
           await execa(
             'npx',
@@ -131,8 +130,7 @@ const toolsPackages = (override?: boolean): BootstrapConfig[] => [
             { cwd },
           )
         }
-      }
-      else {
+      } else {
         await execa(
           'npx',
           ['husky', 'add', '.husky/pre-commit', 'npx lint-staged'],
@@ -244,7 +242,7 @@ export const chain: Chain = [
   },
   {
     name: 'releaseType',
-    type: prev => (prev ? 'select' : null),
+    type: (prev) => (prev ? 'select' : null),
     message: 'choose the version tool',
     initial: 0,
     choices: [
